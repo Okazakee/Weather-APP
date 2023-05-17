@@ -54,8 +54,8 @@ export default function Home() {
         <p className={HomeStyles.p}>Add city</p>
       </div>
       <div>
-        {cities.map((city) => {
-          return <CardMobile city={city} />
+        {cities.map((city, i) => {
+          return <CardMobile key={i} city={city} />
         })}
       </div>
     </>

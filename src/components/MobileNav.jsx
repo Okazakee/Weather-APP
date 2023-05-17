@@ -9,6 +9,7 @@ export const MobileNav = () => {
     // NextJS router
     const router = useRouter();
 
+    // Import Navbar styles from context
     const { navStyles, updateSelectedIcon } = useContext(StylesContext);
 
     const navBtnsArray = [faHouse, faMagnifyingGlass, faLocationDot];

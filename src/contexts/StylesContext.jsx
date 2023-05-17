@@ -29,7 +29,7 @@ const StylesProvider = ({ children }) => {
 
     const HomeStyles = {
         div1: "text-center pt-10 text-[#01175f]",
-        div2: "pt-10 pb-7 flex justify-center items-center text-[#01175f]",
+        addCityButtonDiv: "cursor-pointer pt-10 pb-7 flex justify-center items-center text-[#01175f]",
         h1: " text-[1.6rem] font-bold ",
         buttons: "w-6 h-6 mr-3",
         p: "text-lg font-bold"
@@ -52,6 +52,10 @@ const StylesProvider = ({ children }) => {
         tempC: "font-bold text-5xl font."
     }
 
+    const CityPageStyles = {
+        container: "min-h-screen text-white"
+    }
+
     return (
       <StylesContext.Provider
         value={{
@@ -61,7 +65,8 @@ const StylesProvider = ({ children }) => {
             layout,
             navStyles,
             HomeStyles,
-            CardMobileStyles
+            CardMobileStyles,
+            CityPageStyles
         }}
       >
         {children}

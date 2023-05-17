@@ -7,6 +7,7 @@ import { StylesContext } from '@/contexts/StylesContext';
 
 export default function Layout ({ children }) {
 
+  // Import Layout styles from context
   const { layout } = useContext(StylesContext);
 
   return (

@@ -13,7 +13,7 @@ export default function Home() {
 
   // Date info from system
   const currentDate = moment();
-  const formatDate = currentDate.format('dddd D,\nMMMM');
+  const formatDate = currentDate.format('dddd D,') + "\n" + currentDate.format('MMM');
   const formatTime = currentDate.format('hh:mm A');
 
   // Testing cities obj

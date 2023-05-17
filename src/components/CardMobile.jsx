@@ -17,7 +17,7 @@ export default function CardMobile({city}) {
                     <div className={CardMobileStyles.cityName}>
                         {name}
                     </div>
-                    <div>
+                    <div className={CardMobileStyles.currentDate}>
                         {date}
                     </div>
                     <div className={CardMobileStyles.currentHour}>

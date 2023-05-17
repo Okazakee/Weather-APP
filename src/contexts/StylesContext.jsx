@@ -4,10 +4,10 @@ const StylesContext = createContext();
 
 const StylesProvider = ({ children }) => {
 
-    // State for navbar button selection
+    // State management for navbar button selection
     const [selectedIcons, SetSelectedIcons] = useState([true, false, false]);
 
-    // navbar button selection handler
+    // Navbar button selection handler
     const updateSelectedIcon = (index) => {
         SetSelectedIcons((prevSelectedIcons) => {
           const newSelectedIcons = prevSelectedIcons.map((icon, i) => (i === index));
@@ -17,7 +17,7 @@ const StylesProvider = ({ children }) => {
 
     // TAILWIND STYLES
     const layout = {
-        root: "bg-[#f1f1f1] min-h-screen",
+        root: "bg-[#f1f1f1] min-h-screen font-sans",
         navbar: "sm:hidden"
     }
 
@@ -28,12 +28,28 @@ const StylesProvider = ({ children }) => {
     };
 
     const HomeStyles = {
-        div1: "text-center pt-12 text-[#01175f]",
-        div2: "py-12 flex justify-center items-center text-[#01175f]",
-        h1: " text-3xl font-semibold ",
+        div1: "text-center pt-10 text-[#01175f]",
+        div2: "pt-10 pb-6 flex justify-center items-center text-[#01175f]",
+        h1: " text-[1.6rem] font-bold ",
         buttons: "w-6 h-6 mr-3",
-        p: "text-lg font-semibold"
+        p: "text-lg font-bold"
     };
+
+    const CardMobileStyles = {
+        weather: {
+            cloudy: "bg-gradient-to-r from-[#575f75] to-[#8f9eae]",
+            rainy: "bg-gradient-to-r from-[#577ce8] to-[#72b0f3]",
+            sunny: "bg-gradient-to-r from-[#577ce8] to-[#72b0f3]",
+            sunnyAndRainy: "bg-gradient-to-r from-[#122f70] to-[#4a85c9]"
+        },
+        cardContainer: "cursor-pointer py-[1.4rem] my-[1.1rem] mx-auto w-[90%] bg-gray-400 rounded-3xl text-center drop-shadow-xl",
+        cardWrapper: "flex justify-around",
+        cardElement: "flex justify-center items-center basis-1/3 text-white",
+        leftInfoWrapper: "flex flex-col text-left ml-4",
+        cityName: "text-2xl font-bold",
+        currentHour: "text-xs",
+        tempC: "font-bold text-5xl"
+    }
 
     return (
       <StylesContext.Provider
@@ -43,7 +59,8 @@ const StylesProvider = ({ children }) => {
             updateSelectedIcon,
             layout,
             navStyles,
-            HomeStyles
+            HomeStyles,
+            CardMobileStyles
         }}
       >
         {children}

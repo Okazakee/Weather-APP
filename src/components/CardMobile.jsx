@@ -7,7 +7,7 @@ export default function CardMobile({city}) {
 
     const { CardMobileStyles } = useContext(StylesContext);
 
-    const { name, date, hour, weatherType, temperature } = city;
+    const { name, date, month, hour, weatherType, temperature } = city;
 
     return (
     <div className={`${CardMobileStyles.cardContainer} ${CardMobileStyles.weather[weatherType]}`}>
@@ -19,6 +19,9 @@ export default function CardMobile({city}) {
                     </div>
                     <div className={CardMobileStyles.currentDate}>
                         {date}
+                    </div>
+                    <div className={CardMobileStyles.currentDate}>
+                        {month}
                     </div>
                     <div className={CardMobileStyles.currentHour}>
                         {hour}

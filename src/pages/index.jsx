@@ -13,13 +13,15 @@ export default function Home() {
 
   // Date info from system
   const currentDate = moment();
-  const formatDate = currentDate.format('dddd D,') + "\n" + currentDate.format('MMM');
+  const formatDate = currentDate.format('dddd D,');
+  const formatMonth = currentDate.format('MMM');
   const formatTime = currentDate.format('hh:mm A');
 
   // Testing cities obj
   const cities = [{
     name: "London",
     date: formatDate,
+    month: formatMonth,
     hour: formatTime,
     weatherType: "sunnyAndRainy",
     temperature: 18
@@ -27,6 +29,7 @@ export default function Home() {
   {
     name: "Turin",
     date: formatDate,
+    month: formatMonth,
     hour: formatTime,
     weatherType: "sunny",
     temperature: 22
@@ -34,6 +37,7 @@ export default function Home() {
   {
     name: "Rome",
     date: formatDate,
+    month: formatMonth,
     hour: formatTime,
     weatherType: "cloudy",
     temperature: 20

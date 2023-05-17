@@ -1,18 +1,27 @@
-import {useContext} from 'react'
+import { useContext } from 'react';
 import { StylesContext } from '@/contexts/StylesContext';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faHouse, faMagnifyingGlass, faLocationDot} from '@fortawesome/free-solid-svg-icons';
+import { faHouse, faMagnifyingGlass, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
 export const MobileNav = () => {
+  const { navStyles, updateSelectedIcon } = useContext(StylesContext);
 
-    const { navStyles } = useContext(StylesContext);
+  const navBtnsArray = [faHouse, faMagnifyingGlass, faLocationDot];
 
-    return (
-    <div className="bg-[#ffffff] mx-2 py-4 text-center rounded-2xl drop-shadow-xl flex justify-around">
-       <FontAwesomeIcon icon={faHouse} />
-       <FontAwesomeIcon icon={faMagnifyingGlass} />
-       <FontAwesomeIcon icon={faLocationDot} />
+  return (
+    <div className={navStyles.navbar}>
+      {navBtnsArray.map((button, i) => (
+        <div
+            className={navStyles.div1(i)}
+            key={i}
+            onClick={() => updateSelectedIcon(i)}>
+                <FontAwesomeIcon
+                    className={navStyles.buttons(i)}
+                    icon={button}
+                />
+        </div>
+      ))}
     </div>
-  )
+  );
 };

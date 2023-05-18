@@ -1,11 +1,13 @@
 import { useContext } from 'react'
 import Link from 'next/link';
+
 import { StylesContext } from '@/contexts/StylesContext';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSquarePlus, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import { faSquarePlus } from '@fortawesome/free-solid-svg-icons';
 
 import CardMobile from '@/components/CardMobile';
+
 import { cities } from '@/utils/cities';
 
 export default function Home() {

@@ -22,10 +22,10 @@ const StylesProvider = ({ children }) => {
   }
 
   const weather = {
-    cloudy: "bg-gradient-to-r from-[#575f75] to-[#8f9eae]",
+    Cloudy: "bg-gradient-to-r from-[#575f75] to-[#8f9eae]",
     rainy: "bg-gradient-to-r from-[#577ce8] to-[#72b0f3]",
-    sunny: "bg-gradient-to-r from-[#577ce8] to-[#72b0f3]",
-    sunnyAndRainy: "bg-gradient-to-r from-[#122f70] to-[#4a85c9]"
+    Sunny: "bg-gradient-to-r from-[#577ce8] to-[#72b0f3]",
+    Sunshower: "bg-gradient-to-r from-[#122f70] to-[#4a85c9]"
   };
 
   const navStyles = {
@@ -44,10 +44,10 @@ const StylesProvider = ({ children }) => {
 
   const CardMobileStyles = {
       weather: {
-          cloudy: "bg-gradient-to-r from-[#575f75] to-[#8f9eae]",
+          Cloudy: "bg-gradient-to-r from-[#575f75] to-[#8f9eae]",
           rainy: "bg-gradient-to-r from-[#577ce8] to-[#72b0f3]",
-          sunny: "bg-gradient-to-r from-[#577ce8] to-[#72b0f3]",
-          sunnyAndRainy: "bg-gradient-to-r from-[#122f70] to-[#4a85c9]"
+          Sunny: "bg-gradient-to-r from-[#577ce8] to-[#72b0f3]",
+          Sunshower: "bg-gradient-to-r from-[#122f70] to-[#4a85c9]"
       },
       cardContainer: "cursor-pointer py-[1.2rem] my-[1rem] mx-auto w-[90%] bg-gray-400 rounded-3xl text-center drop-shadow-xl",
       cardWrapper: "flex justify-around",
@@ -60,7 +60,13 @@ const StylesProvider = ({ children }) => {
   }
 
   const CityPageStyles = {
-      container: "min-h-screen text-white"
+      container: "min-h-screen text-white",
+      topWrapper: "pt-2 flex justify-between items-center mx-2",
+      cityName: "flex text-3xl font-semibold ",
+      buttons: "w-6 h-6 cursor-pointer mt-2 hovr:text-[#01175f]",
+      dateWeatherWrapper: "flex flex-col mx-auto text-lg",
+      dateText: "mx-auto my-2 font-semibold",
+      weatherText: "mx-auto font-light",
   }
 
   return (

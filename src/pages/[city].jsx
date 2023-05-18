@@ -1,6 +1,11 @@
 import { useContext } from 'react';
+import Link from 'next/link';
+
 import { StylesContext } from '@/contexts/StylesContext';
 import { SystemTimeContext } from '@/contexts/SystemTimeContext';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSquarePlus, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 import { cities } from '@/utils/cities';
 
@@ -36,11 +41,24 @@ export default function City({ selectedCity }) {
 
   return (
     <div className={`${CityPageStyles.container} ${weather[weatherType]}`}>
-      {name}
-      {formatDate}
-      {formatMonth}
-      {weatherType}
-      {temperature}
+      <div className={CityPageStyles.topWrapper}>
+        <FontAwesomeIcon className={CityPageStyles.buttons} icon={faArrowLeft} />
+        <p className={CityPageStyles.cityName}>
+          {name}
+        </p>
+        <FontAwesomeIcon className={CityPageStyles.buttons} icon={faSquarePlus} />
+      </div>
+      <div className={CityPageStyles.dateWeatherWrapper}>
+        <p className={CityPageStyles.dateText}>
+          {`${formatDate} ${formatMonth}`}
+        </p>
+        <p className={CityPageStyles.weatherText}>
+          {weatherType}
+        </p>
+      </div>
+      <div>
+        {/* temp + img */}
+      </div>
     </div>
   );
 }

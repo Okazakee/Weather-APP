@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 export default function CardMobile({city}) {
 
-    // Import Card styles form context
+    // Import Card styles and SystemDate form context
     const { CardMobileStyles, weather } = useContext(StylesContext);
     const { formatDate, formatMonth, formatTime } = useContext(SystemTimeContext);
 

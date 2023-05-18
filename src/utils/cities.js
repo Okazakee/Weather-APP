@@ -1,16 +1,16 @@
 // Testing cities obj
 export const cities = [{
   name: "London",
-  weatherType: "sunnyAndRainy",
+  weatherType: "Sunshower",
   temperature: 18
 },
 {
   name: "Turin",
-  weatherType: "sunny",
+  weatherType: "Sunny",
   temperature: 22
 },
 {
   name: "Rome",
-  weatherType: "cloudy",
+  weatherType: "Cloudy",
   temperature: 20
 }];

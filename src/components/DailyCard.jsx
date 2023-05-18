@@ -14,12 +14,12 @@ export default function DailyCard({data}) {
         <p className={DailyCardStyles.dayText}>{day}</p>
         <p className={DailyCardStyles.tempText}>{temp + "°"}</p>
         <Image
-          className="w-20 pb-3 mx-auto"
-          src={`/weatherIcons/${weatherType}.png`}
-          width={500}
-          height={500}
-          alt="weatherType"
-          quality={100}
+            className="pb-3 mx-auto"
+            src={`/weatherIcons/${weatherType}.png`}
+            width={80}
+            height={80}
+            alt="weatherType"
+            quality={60}
         />
     </div>
   )

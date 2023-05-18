@@ -17,7 +17,7 @@ const StylesProvider = ({ children }) => {
 
   // TAILWIND STYLES
   const layout = {
-    root: "bg-[#f1f1f1] min-h-screen font-sans",
+    root: "bg-[#f1f1f1] h-screen font-sans",
     navbar: "sm:hidden"
   }
 
@@ -70,11 +70,11 @@ const StylesProvider = ({ children }) => {
     climateInfo: "flex justify-center my-4",
     tempText: "ml-5 font-bold text-[5.8rem]",
     tempLine: "my-[4.2rem]",
-    dailyCardsWrapper: "flex overflow-y-visible overflow-x-scroll hide-scroll-bar",
+    dailyCardsWrapper: "ml-2 grid grid-flow-col overflow-x-auto hideScrollbar pb-[5vh]",
   }
 
   const DailyCardStyles = {
-    container: "glassCard flex flex-col p-2 drop-shadow-xl mx-1.5 text-center font-bold justify-center",
+    container: "glassCard p-2 shadow-xl mx-1.5 text-center font-bold maw-w-fit",
     dayText: "text-xl pt-3",
     tempText: "text-3xl px-8 py-2"
   }

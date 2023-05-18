@@ -1,23 +1,20 @@
-import { useRouter } from 'next/router';
 import { useContext } from 'react'
 import { StylesContext } from '@/contexts/StylesContext';
+import { SystemTimeContext } from '@/contexts/SystemTimeContext';
 
 import Image from 'next/image';
 
 export default function CardMobile({city}) {
 
-    // NextJS router
-    const router = useRouter();
-
     // Import Card styles form context
-    const { CardMobileStyles } = useContext(StylesContext);
+    const { CardMobileStyles, weather } = useContext(StylesContext);
+    const { formatDate, formatMonth, formatTime } = useContext(SystemTimeContext);
 
-    const { name, date, month, hour, weatherType, temperature } = city;
+    const { name, weatherType, temperature } = city;
 
     return (
     <div
-        className={`${CardMobileStyles.cardContainer} ${CardMobileStyles.weather[weatherType]}`}
-        onClick={() => router.push(`/${name}`)}>
+        className={`${CardMobileStyles.cardContainer} ${weather[weatherType]}`}>
         <div className={CardMobileStyles.cardWrapper}>
             <div className={CardMobileStyles.cardElement}>
                 <div className={CardMobileStyles.leftInfoWrapper}>
@@ -25,13 +22,13 @@ export default function CardMobile({city}) {
                         {name}
                     </div>
                     <div className={CardMobileStyles.currentDate}>
-                        {date}
+                        {formatDate}
                     </div>
                     <div className={CardMobileStyles.currentDate}>
-                        {month}
+                        {formatMonth}
                     </div>
                     <div className={CardMobileStyles.currentHour}>
-                        {hour}
+                        {formatTime}
                     </div>
                 </div>
             </div>

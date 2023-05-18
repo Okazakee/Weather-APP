@@ -1,45 +1,46 @@
-import { useContext } from 'react'
+import { useContext } from 'react';
 import { StylesContext } from '@/contexts/StylesContext';
+import { SystemTimeContext } from '@/contexts/SystemTimeContext';
 
 import { cities } from '@/utils/cities';
 
 export async function getStaticPaths() {
-
   const paths = cities.map((city) => ({
     params: { city: city.name }
   }));
 
   return {
     paths,
-    fallback: true // See the "fallback" section below
+    fallback: false
   };
 }
 
 export async function getStaticProps({ params }) {
-  // Find the city data based on the provided name parameter
-  const { city } = params; // Destructure the 'city' parameter from params
+  const { city } = params;
 
-  // Find the city data based on the provided name parameter
   const selectedCity = cities.find((City) => City.name === city);
 
   return {
     props: {
-      city: selectedCity
+      selectedCity
     }
   };
 }
 
-export default function City({city}) {
+export default function City({ selectedCity }) {
 
-  const { CardMobileStyles, CityPageStyles } = useContext(StylesContext);
+  const { weather, CityPageStyles } = useContext(StylesContext);
+  const { formatDate, formatMonth } = useContext(SystemTimeContext);
+
+  const { name, weatherType, temperature } = selectedCity;
 
   return (
-    <div className={`${CityPageStyles.container} ${CardMobileStyles.weather[city.weatherType]}`}>
-      {city.name}
-      {city.date}
-      {city.month}
-      {city.weatherType}
-      {city.temperature}
+    <div className={`${CityPageStyles.container} ${weather[weatherType]}`}>
+      {name}
+      {formatDate}
+      {formatMonth}
+      {weatherType}
+      {temperature}
     </div>
-  )
+  );
 }

@@ -4,13 +4,16 @@ import Layout from '../components/Layout';
 import '../styles/globals.css';
 
 import { StylesProvider } from '../contexts/StylesContext';
+import { SystemTimeProvider } from '@/contexts/SystemTimeContext';
 
 function App({ Component, pageProps }) {
     return (
       <StylesProvider>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <SystemTimeProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </SystemTimeProvider>
       </StylesProvider>
     );
   }

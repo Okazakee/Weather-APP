@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import Link from 'next/link';
 import { StylesContext } from '@/contexts/StylesContext';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -28,7 +29,11 @@ export default function Home() {
       </div>
       <div>
         {cities.map((city, i) => {
-          return <CardMobile key={i} city={city} />
+          return (
+            <Link href={`/${city.name}`} key={i}>
+              <CardMobile key={i} city={city} />
+            </Link>
+          )
         })}
       </div>
     </>

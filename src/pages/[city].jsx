@@ -78,11 +78,13 @@ export default function City({ selectedCity }) {
         <HourlyTempLine />
       </div>
       <div className={CityPageStyles.dailyCardsWrapper}>
-        <div className={CityPageStyles.cardsContainer}>
           <DailyCard data={{ weatherType: weatherType, temp: temperature, day: formatDate.slice(0, -3) }} />
           <DailyCard data={{ weatherType: "Rainy", temp: temperature, day: formatDate.slice(0, -3) }} />
           <DailyCard data={{ weatherType: "Cloudy", temp: temperature, day: formatDate.slice(0, -3) }} />
-        </div>
+          <DailyCard data={{ weatherType: weatherType, temp: temperature, day: formatDate.slice(0, -3) }} />
+          <DailyCard data={{ weatherType: "Rainy", temp: temperature, day: formatDate.slice(0, -3) }} />
+          <DailyCard data={{ weatherType: "Cloudy", temp: temperature, day: formatDate.slice(0, -3) }} />
+          <DailyCard data={{ weatherType: "Cloudy", temp: temperature, day: formatDate.slice(0, -3) }} />
       </div>
     </div>
   );

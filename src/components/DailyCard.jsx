@@ -14,7 +14,7 @@ export default function DailyCard({data}) {
         <p className={DailyCardStyles.dayText}>{day}</p>
         <p className={DailyCardStyles.tempText}>{temp + "°"}</p>
         <Image
-          className="w-20 pb-3"
+          className="w-20 pb-3 mx-auto"
           src={`/weatherIcons/${weatherType}.png`}
           width={500}
           height={500}

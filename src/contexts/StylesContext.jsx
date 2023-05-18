@@ -70,12 +70,11 @@ const StylesProvider = ({ children }) => {
     climateInfo: "flex justify-center my-4",
     tempText: "ml-5 font-bold text-[5.8rem]",
     tempLine: "my-[4.2rem]",
-    dailyCardsWrapper: "mx-2",
-    cardsContainer: "flex"
+    dailyCardsWrapper: "flex overflow-y-visible overflow-x-scroll hide-scroll-bar",
   }
 
   const DailyCardStyles = {
-    container: "p-2 glassCard drop-shadow-xl mx-1.5 text-center font-bold flex flex-wrap justify-center",
+    container: "glassCard flex flex-col p-2 drop-shadow-xl mx-1.5 text-center font-bold justify-center",
     dayText: "text-xl pt-3",
     tempText: "text-3xl px-8 py-2"
   }

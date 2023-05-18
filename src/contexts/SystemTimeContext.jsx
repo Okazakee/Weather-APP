@@ -4,6 +4,7 @@ import moment from 'moment';
 const SystemTimeContext = createContext();
 
 const SystemTimeProvider = ({ children }) => {
+
   // State management for current system time
   const [formatDate, setFormatDate] = useState('');
   const [formatMonth, setFormatMonth] = useState('');

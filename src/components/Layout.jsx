@@ -1,8 +1,8 @@
-import React from 'react';
+import { useContext } from 'react'
 import Head from 'next/head';
+
 import { MobileNav } from './MobileNav';
 
-import { useContext } from 'react'
 import { StylesContext } from '@/contexts/StylesContext';
 
 export default function Layout ({ children }) {
@@ -13,7 +13,7 @@ export default function Layout ({ children }) {
   return (
     <div>
       <Head>
-        <link rel="icon" href="/favicon.svg" />
+        {/* <link rel="icon" href="/favicon.svg" /> */}
       </Head>
       <main className={layout.root}>
         {children}

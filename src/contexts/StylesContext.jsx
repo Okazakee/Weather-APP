@@ -17,7 +17,7 @@ const StylesProvider = ({ children }) => {
 
   // TAILWIND STYLES
   const layout = {
-    root: "bg-[#f1f1f1] h-screen font-sans",
+    root: "bg-[#f1f1f1] h-screen font-sans hideTouchInputChrome",
     navbar: "sm:hidden"
   }
 

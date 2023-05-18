@@ -45,7 +45,7 @@ const StylesProvider = ({ children }) => {
   const CardMobileStyles = {
       weather: {
           Cloudy: "bg-gradient-to-r from-[#575f75] to-[#8f9eae]",
-          rainy: "bg-gradient-to-r from-[#577ce8] to-[#72b0f3]",
+          Rainy: "bg-gradient-to-r from-[#577ce8] to-[#72b0f3]",
           Sunny: "bg-gradient-to-r from-[#577ce8] to-[#72b0f3]",
           Sunshower: "bg-gradient-to-r from-[#122f70] to-[#4a85c9]"
       },

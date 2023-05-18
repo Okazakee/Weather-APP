@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import { StylesContext } from '@/contexts/StylesContext';
 import { SystemTimeContext } from '@/contexts/SystemTimeContext';
@@ -42,7 +43,9 @@ export default function City({ selectedCity }) {
   return (
     <div className={`${CityPageStyles.container} ${weather[weatherType]}`}>
       <div className={CityPageStyles.topWrapper}>
-        <FontAwesomeIcon className={CityPageStyles.buttons} icon={faArrowLeft} />
+        <Link href={`/`}>
+          <FontAwesomeIcon className={CityPageStyles.buttons} icon={faArrowLeft} />
+        </Link>
         <p className={CityPageStyles.cityName}>
           {name}
         </p>
@@ -56,8 +59,18 @@ export default function City({ selectedCity }) {
           {weatherType}
         </p>
       </div>
-      <div>
-        {/* temp + img */}
+      <div className={CityPageStyles.climateInfo}>
+        <Image
+          className="w-24 h-24 mt-7"
+          src={`/weatherIcons/${weatherType}.png`}
+          width={500}
+          height={500}
+          alt="weatherType"
+          quality={100}
+        />
+        <p className={CityPageStyles.tempText}>
+          {temperature + "°"}
+        </p>
       </div>
     </div>
   );

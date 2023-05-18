@@ -56,7 +56,7 @@ const StylesProvider = ({ children }) => {
       cityName: "text-2xl font-bold",
       currentDate: "text-xs font-semibold",
       currentHour: "text-[0.7rem] font-light mt-2",
-      tempC: "font-bold text-5xl font."
+      tempC: "font-bold text-5xl"
   }
 
   const CityPageStyles = {
@@ -67,6 +67,8 @@ const StylesProvider = ({ children }) => {
       dateWeatherWrapper: "flex flex-col mx-auto text-lg",
       dateText: "mx-auto my-2 font-semibold",
       weatherText: "mx-auto font-light",
+      climateInfo: "flex justify-around  mt-10 mx-14",
+      tempText: "ml-5 font-bold text-[5.5rem]"
   }
 
   return (

@@ -5,14 +5,17 @@ import '../styles/globals.css';
 
 import { StylesProvider } from '../contexts/StylesContext';
 import { SystemTimeProvider } from '@/contexts/SystemTimeContext';
+import { WeatherDataProvider } from '@/contexts/WeatherDataContext';
 
 function App({ Component, pageProps }) {
     return (
       <StylesProvider>
         <SystemTimeProvider>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
+          <WeatherDataProvider>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </WeatherDataProvider>
         </SystemTimeProvider>
       </StylesProvider>
     );

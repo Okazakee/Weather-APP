@@ -9,6 +9,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquarePlus, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 import { cities } from '@/utils/cities';
+import HourlyTempLine from '@/components/HourlyTempLine';
+import DailyCard from '@/components/DailyCard';
 
 export async function getStaticPaths() {
   const paths = cities.map((city) => ({
@@ -24,7 +26,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const { city } = params;
 
-  const selectedCity = cities.find((City) => City.name === city);
+  const selectedCity = cities.find((cityObj) => cityObj.name === city);
 
   return {
     props: {
@@ -71,6 +73,16 @@ export default function City({ selectedCity }) {
         <p className={CityPageStyles.tempText}>
           {temperature + "°"}
         </p>
+      </div>
+      <div className={CityPageStyles.tempLine}>
+        <HourlyTempLine />
+      </div>
+      <div className={CityPageStyles.dailyCardsWrapper}>
+        <div className={CityPageStyles.cardsContainer}>
+          <DailyCard data={{ weatherType: weatherType, temp: temperature, day: formatDate.slice(0, -3) }} />
+          <DailyCard data={{ weatherType: "Rainy", temp: temperature, day: formatDate.slice(0, -3) }} />
+          <DailyCard data={{ weatherType: "Cloudy", temp: temperature, day: formatDate.slice(0, -3) }} />
+        </div>
       </div>
     </div>
   );

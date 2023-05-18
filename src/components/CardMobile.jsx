@@ -43,7 +43,7 @@ export default function CardMobile({city}) {
                 />
             </div>
             <div className={CardMobileStyles.cardElement}>
-                <h1 className={CardMobileStyles.tempC}>
+                <h1 className={CardMobileStyles.tempText}>
                     {temperature + "°"}
                 </h1>
             </div>

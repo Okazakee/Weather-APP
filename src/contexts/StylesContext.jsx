@@ -67,7 +67,7 @@ const StylesProvider = ({ children }) => {
     dateWeatherWrapper: "flex flex-col mx-auto text-lg",
     dateText: "mx-auto my-2 font-semibold",
     weatherText: "mx-auto font-light",
-    climateInfo: "flex justify-center mt-4 ",
+    climateInfo: "flex items-center justify-center mt-4 ",
     tempText: "ml-5 font-bold text-[5.8rem]",
     tempLine: "my-[3rem]",
     dailyCardsWrapper: "pl-2 grid grid-flow-col overflow-x-auto hideScrollbar",

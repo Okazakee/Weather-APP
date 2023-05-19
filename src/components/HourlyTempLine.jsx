@@ -10,6 +10,7 @@ export default function HourlyTempLine() {
   const { HourlyLineStyles } = useContext(StylesContext);
 
   const testData = [
+    { hour: "Now", temp: "22" },
     { hour: "01:11 PM", temp: "10" },
     { hour: "01:11 PM", temp: "10" },
     { hour: "01:11 PM", temp: "10" },
@@ -25,34 +26,23 @@ export default function HourlyTempLine() {
 
   return (
     <div className={HourlyLineStyles.wrapper}>
-        <div className={HourlyLineStyles.mainContainer}>
-          <div className={HourlyLineStyles.innerBox}>
-            <p>
-              Now
-            </p>
-            <FontAwesomeIcon className={"text-xl"} icon={faCircle} />
-            <p>
-              22°
-            </p>
-          </div>
-        </div>
-        <div className={HourlyLineStyles.mapWrapper}>
-          {testData && testData.map((hourInfo, i) => {
-            return (
-              <div key={i} className={HourlyLineStyles.container}>
-                <div className={HourlyLineStyles.innerBox2}>
-                  <p className={HourlyLineStyles.p}>
-                    {hourInfo.hour}
-                  </p>
-                  <FontAwesomeIcon className={""} icon={faCircle} />
-                  <p>
-                    {`${hourInfo.temp}°`}
-                  </p>
-                </div>
+      <div className={HourlyLineStyles.stroke}>
+        {testData && testData.map((hourInfo, i) => {
+          return (
+            <div key={i} className={HourlyLineStyles.container}>
+              <div className={HourlyLineStyles.innerBox(i)}>
+                <p className={HourlyLineStyles.p}>
+                  {hourInfo.hour}
+                </p>
+                <FontAwesomeIcon className={""} icon={faCircle} />
+                <p>
+                  {`${hourInfo.temp}°`}
+                </p>
               </div>
-            );
-          })}
-        </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   )
 }

@@ -80,13 +80,11 @@ const StylesProvider = ({ children }) => {
   }
 
   const HourlyLineStyles = {
-    wrapper: "pl-8 flex items-center overflow-x-auto hideScrollbar",
-    mapWrapper: "grid grid-flow-col",
-    mainContainer: "mx-2",
+    wrapper: "pl-8 flex overflow-x-auto hideScrollbar",
+    stroke: "flex items-center bg-red-500 rounded-full",
     container: "mr-2",
-    innerBox: "text-center font-bold text-lg",
-    innerBox2: "text-center text-sm",
-    p: "w-16 text-[0.8rem]"
+    innerBox: (i) => `text-center border ${i === 0 ? "font-bold text-lg" : "text-sm"}`,
+    p: "w-16 text-[0.8rem]",
   }
 
   return (

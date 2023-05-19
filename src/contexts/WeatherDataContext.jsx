@@ -23,10 +23,12 @@ const WeatherDataProvider = ({ children }) => {
         temperature: Math.floor(currentWeather[selectedCity].main.temp)
       }
 
-      const dailyCardData = weeklyForecast[selectedCity].data;
+      const dailyCardData = weeklyForecast[selectedCity];
 
       SetDetailsPageData(detailsPageData);
       SetDailyCardData(dailyCardData);
+
+      console.log(dailyCardData, detailsPageData)
     }
   }, [currentWeather, weeklyForecast, selectedCity]);
 

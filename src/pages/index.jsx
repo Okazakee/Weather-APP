@@ -7,37 +7,45 @@ import Details from '@/containers/Details';
 import { WeatherDataContext } from '@/contexts/WeatherDataContext';
 
 export async function getServerSideProps() {
-
   // Hardcoded 3 main cities to check
   const cities = ['London', 'Turin', 'Rome', 'Dubai'];
 
   const OW_apiKey = process.env.OPENWEATHER_API_KEY;
   const WB_apiKey = process.env.WEATHERBIT_API_KEY;
-  const fallbackEndpoint = process.env.fallbackEndpoint;
+  const currentWeatherFallback = process.env.CURRENT_FALLBACK_ENDPOINT;
+  const weeklyForecastFallback = process.env.WEEKLY_FALLBACK_ENDPOINT;
+  const hourlyForecastFallback = process.env.HOURLY_FALLBACK_ENDPOINT;
 
   if (!OW_apiKey) {
     throw new Error('Missing API key');
   }
 
   try {
-
-    // Fetch weather data for each city in cities array
+    // Fetch current weather data for each city in cities array
     const fetchCurrentWeatherData = await Promise.all(
       cities.map(async (cityName) => {
         const response = await axios.get(
           `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${OW_apiKey}&units=metric`
-          );
-          return response.data;
-        })
         );
+        return response.data;
+      })
+    );
 
     // Reconstruct fetched data adding name property to each object
-    const currentWeatherData = fetchCurrentWeatherData.reduce((acc, data, index) => {
-      const cityName = cities[index];
-      return { ...acc, [cityName]: data };
-    }, {});
+    let currentWeatherData;
+    try {
+      currentWeatherData = fetchCurrentWeatherData.reduce((acc, data, index) => {
+        const cityName = cities[index];
+        return { ...acc, [cityName]: data };
+      }, {});
+    } catch (error) {
+      console.error('Error reconstructing current weather data:', error);
+      // Use the fallback URI here
+      const fallbackResponse = await axios.get(currentWeatherFallback);
+      currentWeatherData = fallbackResponse.data;
+    }
 
-    // Fetch weather data for each city in cities array
+    // Fetch weekly forecast data for each city in cities array
     const fetchWeeklyForecast = await Promise.all(
       cities.map(async (cityName) => {
         try {
@@ -48,7 +56,7 @@ export async function getServerSideProps() {
         } catch (error) {
           console.error('Error fetching weather data:', error);
           // Use the fallback URI here
-          const fallbackResponse = await axios.get(fallbackEndpoint);
+          const fallbackResponse = await axios.get(weeklyForecastFallback);
           return fallbackResponse.data;
         }
       })
@@ -63,7 +71,7 @@ export async function getServerSideProps() {
       props: {
         currentWeatherData,
         weeklyForecastData,
-        cities
+        cities,
       },
     };
   } catch (error) {
@@ -88,10 +96,10 @@ export default function Index({ cities, currentWeatherData, weeklyForecastData }
     const isMobile = window.innerWidth <= mobileBreakpoint;
 
     if (true) {
-    /* if (!isMobile && selectedCity === null) { */
+    if (!isMobile && selectedCity === null) {
       SetSelectedCity('London');
     }
-  }, [currentWeatherData,
+  }}, [currentWeatherData,
       weeklyForecastData,
       SetCurrentWeather,
       SetWeeklyForecast,

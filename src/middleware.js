@@ -2,9 +2,11 @@
 import { NextResponse } from 'next/server';
 import { get } from '@vercel/edge-config';
 
-export const config = { matcher: '/fallbackWeekly' };
+export const config = {
+  matcher: ['/fallbackWeekly', '/fallbackHourly'],
+};
 
 export async function middleware() {
-  const weatherBitData = await get('weatherBitData');
-  return NextResponse.json(weatherBitData);
+  const weeklyForecast = await get('weeklyForecast');
+  return NextResponse.json(weeklyForecast);
 }

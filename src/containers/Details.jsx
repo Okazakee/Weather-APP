@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import Image from 'next/image';
+import moment from 'moment';
 
 import HourlyTempLine from '@/components/HourlyTempLine';
 import DailyCard from '@/components/DailyCard';
@@ -69,7 +70,10 @@ export default function Details() {
         </div>
         <div className={DetailsPageStyles.dailyCardsWrapper}>
             {dailyCardData && dailyCardData.map((dayForecastData, i) => {
-                <DailyCard key={i} data={{ weatherType: dayForecastData[i].weather.description, temp: Math.floor(dayForecastData[i].temp), day: moment(dayForecastData[i].datetime).format('dddd') }} />
+                console.log(dayForecastData)
+                return (
+                    <DailyCard key={i} data={{ weatherType: dayForecastData.weather.description, temp: Math.floor(dayForecastData.temp), day: moment(dayForecastData.datetime).format('dddd') }} />
+                )
             })}
             {/* <DailyCard data={{ weatherType: detailsPageData.weatherType, temp: detailsPageData.temperature, day: formatDate.slice(0, -3) }} />
             <DailyCard data={{ weatherType: detailsPageData.weatherType, temp: detailsPageData.temperature, day: formatDate.slice(0, -3) }} />

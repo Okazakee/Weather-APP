@@ -13,7 +13,7 @@ export default function Home() {
     // Import Home styles from context
     const { HomeStyles } = useContext(StylesContext);
 
-    const { SetSelectedCity, weatherData, avaliableCities } = useContext(WeatherDataContext);
+    const { SetSelectedCity, currentWeather, avaliableCities } = useContext(WeatherDataContext);
 
     return (
       <div>
@@ -30,10 +30,10 @@ export default function Home() {
           <p className={HomeStyles.p}>Add city</p>
         </div>
         <div className={HomeStyles.cardWrapper}>
-          {weatherData && avaliableCities && avaliableCities.map((city, i) => {
+          {currentWeather && avaliableCities && avaliableCities.map((city, i) => {
             return (
               <div key={i} onClick={() => SetSelectedCity(city)}>
-                <CardMobile key={i} cityName={city} weatherData={weatherData[city]} />
+                <CardMobile key={i} cityName={city} currentWeather={currentWeather[city]} />
               </div>
             );
           })}

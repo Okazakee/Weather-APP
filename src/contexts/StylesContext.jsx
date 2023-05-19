@@ -33,7 +33,7 @@ const StylesProvider = ({ children }) => {
 
   const navStyles = {
     navbar: "overflow-hidden bg-white mx-5 text-center rounded-3xl drop-shadow-xl flex justify-around fixed bottom-5 left-0 right-0 z-50",
-    div1: (i) => `cursor-pointer p-5 transition-all duration-200 transform-gpu border-b-2 ${selectedIcons[i] ? "border-[#01175f]" : "border-white"}`,
+    div1: (i) => `cursor-pointer px-5 py-[1.1rem] transition-all duration-200 transform-gpu border-b-2 ${selectedIcons[i] ? "border-[#01175f]" : "border-white"}`,
     buttons: (i) => `transition-all duration-200 transform-gpu w-7 h-7 hover:text-[#01175f] ${selectedIcons[i] ? 'text-[#01175f]' : 'text-[#787a94]'}`,
   };
 
@@ -80,10 +80,9 @@ const StylesProvider = ({ children }) => {
   }
 
   const HourlyLineStyles = {
-    wrapper: "pl-8 flex overflow-x-auto hideScrollbar",
-    stroke: "flex items-center bg-red-500 rounded-full",
+    wrapper: "pl-8 flex items-center overflow-x-auto hideScrollbar",
     container: "mr-2",
-    innerBox: (i) => `text-center border ${i === 0 ? "font-bold text-lg" : "text-sm"}`,
+    innerBox: (i) => `text-center ${i === 0 ? "font-bold text-lg" : "text-sm"}`,
     p: "w-16 text-[0.8rem]",
   }
 

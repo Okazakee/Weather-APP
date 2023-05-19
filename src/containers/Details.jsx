@@ -16,7 +16,7 @@ export default function Details() {
     // Various context imports
     const { weatherStyle, DetailsPageStyles } = useContext(StylesContext);
     const { formatDate, formatMonth } = useContext(SystemContext);
-    const { SetSelectedCity, selectedCity, detailsPageData } = useContext(WeatherDataContext);
+    const { SetSelectedCity, selectedCity, detailsPageData, dailyCardData } = useContext(WeatherDataContext);
 
     const [isLoading, SetIsLoading] = useState(true)
 
@@ -68,13 +68,15 @@ export default function Details() {
           <HourlyTempLine />
         </div>
         <div className={DetailsPageStyles.dailyCardsWrapper}>
+            {dailyCardData && dailyCardData.map((dayForecastData, i) => {
+                <DailyCard key={i} data={{ weatherType: dayForecastData[i].weather.description, temp: Math.floor(dayForecastData[i].temp), day: moment(dayForecastData[i].datetime).format('dddd') }} />
+            })}
+            {/* <DailyCard data={{ weatherType: detailsPageData.weatherType, temp: detailsPageData.temperature, day: formatDate.slice(0, -3) }} />
             <DailyCard data={{ weatherType: detailsPageData.weatherType, temp: detailsPageData.temperature, day: formatDate.slice(0, -3) }} />
             <DailyCard data={{ weatherType: detailsPageData.weatherType, temp: detailsPageData.temperature, day: formatDate.slice(0, -3) }} />
             <DailyCard data={{ weatherType: detailsPageData.weatherType, temp: detailsPageData.temperature, day: formatDate.slice(0, -3) }} />
             <DailyCard data={{ weatherType: detailsPageData.weatherType, temp: detailsPageData.temperature, day: formatDate.slice(0, -3) }} />
-            <DailyCard data={{ weatherType: detailsPageData.weatherType, temp: detailsPageData.temperature, day: formatDate.slice(0, -3) }} />
-            <DailyCard data={{ weatherType: detailsPageData.weatherType, temp: detailsPageData.temperature, day: formatDate.slice(0, -3) }} />
-            <DailyCard data={{ weatherType: detailsPageData.weatherType, temp: detailsPageData.temperature, day: formatDate.slice(0, -3) }} />
+            <DailyCard data={{ weatherType: detailsPageData.weatherType, temp: detailsPageData.temperature, day: formatDate.slice(0, -3) }} /> */}
         </div>
       </div>
     );

@@ -21,24 +21,40 @@ export async function getServerSideProps() {
   try {
 
     // Fetch weather data for each city in cities array
-    const fetchWeatherData = await Promise.all(
+    const fetchCurrentWeatherData = await Promise.all(
       cities.map(async (cityName) => {
         const response = await axios.get(
           `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${OW_apiKey}&units=metric`
+          );
+          return response.data;
+        })
+        );
+
+    // Reconstruct fetched data adding name property to each object
+    const currentWeatherData = fetchCurrentWeatherData.reduce((acc, data, index) => {
+      const cityName = cities[index];
+      return { ...acc, [cityName]: data };
+    }, {});
+
+    // Fetch weather data for each city in cities array
+    const fetchWeeklyForecast = await Promise.all(
+      cities.map(async (cityName) => {
+        const response = await axios.get(
+          `https://api.weatherbit.io/v2.0/forecast/daily?city=${cityName}&key=${WB_apiKey}&units=M`
         );
         return response.data;
       })
     );
 
-    // Reconstruct fetched data adding name property to each object
-    const weatherDataFetch = fetchWeatherData.reduce((acc, data, index) => {
+    const weeklyForecastData = fetchWeeklyForecast.reduce((acc, data, index) => {
       const cityName = cities[index];
-      return { ...acc, [cityName]: data };
+      return { ...acc, [cityName]: data.data };
     }, {});
 
     return {
       props: {
-        weatherDataFetch,
+        currentWeatherData,
+        weeklyForecastData,
         cities
       },
     };
@@ -47,16 +63,17 @@ export async function getServerSideProps() {
   }
 }
 
-export default function Index({ weatherDataFetch, cities }) {
+export default function Index({ cities, currentWeatherData, weeklyForecastData }) {
 
   // Import weather data from context
-  const { SetWeatherData, SetAvaliableCities, SetSelectedCity, selectedCity } = useContext(WeatherDataContext);
+  const { SetCurrentWeather, SetWeeklyForecast, SetAvaliableCities, SetSelectedCity, selectedCity } = useContext(WeatherDataContext);
 
   // Weatherdata and viewport handler
   useEffect(() => {
-    if (weatherDataFetch) {
+    if (currentWeatherData && weeklyForecastData) {
       SetAvaliableCities(cities);
-      SetWeatherData(weatherDataFetch);
+      SetCurrentWeather(currentWeatherData);
+      SetWeeklyForecast(weeklyForecastData);
     }
 
     const mobileBreakpoint = 640;
@@ -66,7 +83,12 @@ export default function Index({ weatherDataFetch, cities }) {
     /* if (!isMobile && selectedCity === null) { */
       SetSelectedCity('London');
     }
-  }, [weatherDataFetch, SetWeatherData, SetAvaliableCities, selectedCity]);
+  }, [currentWeatherData,
+      weeklyForecastData,
+      SetCurrentWeather,
+      SetWeeklyForecast,
+      SetAvaliableCities,
+      selectedCity]);
 
   return (
     <div>

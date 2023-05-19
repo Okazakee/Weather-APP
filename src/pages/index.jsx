@@ -13,6 +13,7 @@ export async function getServerSideProps() {
 
   const OW_apiKey = process.env.OPENWEATHER_API_KEY;
   const WB_apiKey = process.env.WEATHERBIT_API_KEY;
+  const fallbackEndpoint = process.env.fallbackEndpoint;
 
   if (!OW_apiKey) {
     throw new Error('Missing API key');
@@ -39,10 +40,17 @@ export async function getServerSideProps() {
     // Fetch weather data for each city in cities array
     const fetchWeeklyForecast = await Promise.all(
       cities.map(async (cityName) => {
-        const response = await axios.get(
-          `https://api.weatherbit.io/v2.0/forecast/daily?city=${cityName}&key=${WB_apiKey}&units=M`
-        );
-        return response.data;
+        try {
+          const response = await axios.get(
+            `https://api.weatherbit.io/v2.0/forecast/daily?city=${cityName}&key=${WB_apiKey}&units=M`
+          );
+          return response.data;
+        } catch (error) {
+          console.error('Error fetching weather data:', error);
+          // Use the fallback URI here
+          const fallbackResponse = await axios.get(fallbackEndpoint);
+          return fallbackResponse.data;
+        }
       })
     );
 

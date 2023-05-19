@@ -4,19 +4,15 @@ const WeatherDataContext = createContext();
 
 const WeatherDataProvider = ({ children }) => {
 
-  const [avaliableCities, SetAvaliableCities] = useState(null);
-
-  const [selectedCity, SetSelectedCity] = useState(null);
-
   // State management for current weather data
+  const [avaliableCities, SetAvaliableCities] = useState(null);
+  const [selectedCity, SetSelectedCity] = useState(null);
   const [weatherData, SetWeatherData] = useState(null);
   const [forecastData, SetForecastData] = useState(null);
   const [detailsPageData, SetDetailsPageData] = useState(null);
 
+  // detailsPageData handler
   useEffect(() => {
-    if (weatherData !== null) {
-      console.log("WeatherData updated!");
-    }
 
     if (selectedCity !== null) {
       const detailsPageData = {

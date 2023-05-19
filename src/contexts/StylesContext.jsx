@@ -32,14 +32,14 @@ const StylesProvider = ({ children }) => {
   };
 
   const navStyles = {
-    navbar: "bg-white mx-5 text-center rounded-3xl drop-shadow-xl flex justify-around fixed bottom-5 left-0 right-0 z-50",
+    navbar: "overflow-hidden bg-white mx-5 text-center rounded-3xl drop-shadow-xl flex justify-around fixed bottom-5 left-0 right-0 z-50",
     div1: (i) => `cursor-pointer p-5 transition-all duration-200 transform-gpu border-b-2 ${selectedIcons[i] ? "border-[#01175f]" : "border-white"}`,
     buttons: (i) => `transition-all duration-200 transform-gpu w-7 h-7 hover:text-[#01175f] ${selectedIcons[i] ? 'text-[#01175f]' : 'text-[#787a94]'}`,
   };
 
   const HomeStyles = {
     div1: "text-center pt-10 text-[#01175f]",
-    cardWrapper: "pb-10",
+    cardWrapper: "pb-28",
     addCityButtonDiv: "cursor-pointer pt-10 pb-7 flex mx-auto w-fit items-center text-[#01175f]",
     h1: " text-[1.6rem] font-bold ",
     buttons: "w-6 h-6 mr-3",
@@ -59,7 +59,7 @@ const StylesProvider = ({ children }) => {
     tempText: "font-bold text-5xl text-right"
   }
 
-  const CityPageStyles = {
+  const DetailsPageStyles = {
     container: "min-h-screen text-white",
     topWrapper: "pt-10 flex justify-between items-center mx-4",
     cityName: "flex text-3xl font-semibold",
@@ -67,16 +67,26 @@ const StylesProvider = ({ children }) => {
     dateWeatherWrapper: "flex flex-col mx-auto text-lg",
     dateText: "mx-auto my-2 font-semibold",
     weatherText: "mx-auto font-light",
-    climateInfo: "flex justify-center my-4",
+    climateInfo: "flex justify-center mt-4 ",
     tempText: "ml-5 font-bold text-[5.8rem]",
-    tempLine: "my-[4.2rem]",
-    dailyCardsWrapper: "ml-2 grid grid-flow-col overflow-x-auto hideScrollbar",
+    tempLine: "my-[3rem]",
+    dailyCardsWrapper: "pl-2 grid grid-flow-col overflow-x-auto hideScrollbar",
   }
 
   const DailyCardStyles = {
-    container: "glassCard p-2 shadow-xl mx-1.5 text-center font-bold maw-w-fit px-2 mb-24",
+    container: "glassCard p-2 drop-shadow-xl mx-1.5 text-center font-bold maw-w-fit px-2 mb-24",
     dayText: "text-xl pt-3",
     tempText: "text-3xl px-8 py-2"
+  }
+
+  const HourlyLineStyles = {
+    wrapper: "pl-8 flex items-center overflow-x-auto hideScrollbar",
+    mapWrapper: "grid grid-flow-col",
+    mainContainer: "mx-2",
+    container: "mr-2",
+    innerBox: "text-center font-bold text-lg",
+    innerBox2: "text-center text-sm",
+    p: "w-16 text-[0.8rem]"
   }
 
   return (
@@ -90,8 +100,9 @@ const StylesProvider = ({ children }) => {
         navStyles,
         HomeStyles,
         CardMobileStyles,
-        CityPageStyles,
-        DailyCardStyles
+        DetailsPageStyles,
+        DailyCardStyles,
+        HourlyLineStyles
       }}
     >
       {children}

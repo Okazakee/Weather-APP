@@ -6,7 +6,7 @@ import DailyCard from '@/components/DailyCard';
 
 import { WeatherDataContext } from '@/contexts/WeatherDataContext';
 import { StylesContext } from '@/contexts/StylesContext';
-import { SystemTimeContext } from '@/contexts/SystemTimeContext';
+import { SystemContext } from '@/contexts/SystemContext';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSquarePlus, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
@@ -14,8 +14,8 @@ import { faSquarePlus, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 export default function Details() {
 
     // Various context imports
-    const { weatherStyle, CityPageStyles } = useContext(StylesContext);
-    const { formatDate, formatMonth } = useContext(SystemTimeContext);
+    const { weatherStyle, DetailsPageStyles } = useContext(StylesContext);
+    const { formatDate, formatMonth } = useContext(SystemContext);
     const { SetSelectedCity, selectedCity, detailsPageData } = useContext(WeatherDataContext);
 
     const [isLoading, SetIsLoading] = useState(true)
@@ -33,41 +33,41 @@ export default function Details() {
     }
 
     return (
-      <div className={`${CityPageStyles.container} ${weatherStyle[detailsPageData.weatherType]}`}>
-        <div className={CityPageStyles.topWrapper}>
+      <div className={`${DetailsPageStyles.container} ${weatherStyle[detailsPageData.weatherType]}`}>
+        <div className={DetailsPageStyles.topWrapper}>
           <div onClick={(() => SetSelectedCity(null))}>
-            <FontAwesomeIcon className={CityPageStyles.buttons} icon={faArrowLeft} />
+            <FontAwesomeIcon className={DetailsPageStyles.buttons} icon={faArrowLeft} />
           </div>
-          <p className={CityPageStyles.cityName}>
+          <p className={DetailsPageStyles.cityName}>
             {selectedCity}
           </p>
-          <FontAwesomeIcon className={CityPageStyles.buttons} icon={faSquarePlus} />
+          <FontAwesomeIcon className={DetailsPageStyles.buttons} icon={faSquarePlus} />
         </div>
-        <div className={CityPageStyles.dateWeatherWrapper}>
-          <p className={CityPageStyles.dateText}>
+        <div className={DetailsPageStyles.dateWeatherWrapper}>
+          <p className={DetailsPageStyles.dateText}>
             {`${formatDate} ${formatMonth}`}
           </p>
-          <p className={CityPageStyles.weatherText}>
+          <p className={DetailsPageStyles.weatherText}>
             {detailsPageData.weatherType}
           </p>
         </div>
-        <div className={CityPageStyles.climateInfo}>
+        <div className={DetailsPageStyles.climateInfo}>
           <Image
-            className="w-24 h-24 mt-7 drop-shadow-xl"
+            className="w-24 h-24 mt-7 drop-shadow-sm"
             src={`/weatherIcons/${detailsPageData.weatherType}.png`}
             width={100}
             height={100}
             alt={`${detailsPageData.weatherType}_weather_icon`}
             quality={100}
           />
-          <p className={CityPageStyles.tempText}>
+          <p className={DetailsPageStyles.tempText}>
             {detailsPageData.temperature + "°"}
           </p>
         </div>
-        <div className={CityPageStyles.tempLine}>
+        <div className={DetailsPageStyles.tempLine}>
           <HourlyTempLine />
         </div>
-        <div className={CityPageStyles.dailyCardsWrapper}>
+        <div className={DetailsPageStyles.dailyCardsWrapper}>
             <DailyCard data={{ weatherType: detailsPageData.weatherType, temp: detailsPageData.temperature, day: formatDate.slice(0, -3) }} />
             <DailyCard data={{ weatherType: detailsPageData.weatherType, temp: detailsPageData.temperature, day: formatDate.slice(0, -3) }} />
             <DailyCard data={{ weatherType: detailsPageData.weatherType, temp: detailsPageData.temperature, day: formatDate.slice(0, -3) }} />

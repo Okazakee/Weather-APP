@@ -2,13 +2,13 @@ import { useContext } from 'react';
 import Image from 'next/image';
 
 import { StylesContext } from '@/contexts/StylesContext';
-import { SystemTimeContext } from '@/contexts/SystemTimeContext';
+import { SystemContext } from '@/contexts/SystemContext';
 
 export default function CardMobile({ cityName, weatherData }) {
 
     // Import Card styles and SystemDate from context
     const { CardMobileStyles, weatherStyle } = useContext(StylesContext);
-    const { formatDate, formatMonth, formatTime } = useContext(SystemTimeContext);
+    const { formatDate, formatMonth, formatTime } = useContext(SystemContext);
 
     const {weather, main} = weatherData;
 
@@ -30,7 +30,7 @@ export default function CardMobile({ cityName, weatherData }) {
                 </div>
                 <div className={CardMobileStyles.cardElement2}>
                 <Image
-                    className="w-20 h-20 drop-shadow-xl"
+                    className="w-20 h-20 drop-shadow-sm"
                     src={`/weatherIcons/${weatherData.weatherType}.png`}
                     width={100}
                     height={100}

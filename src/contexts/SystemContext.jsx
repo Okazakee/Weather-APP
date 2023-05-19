@@ -1,14 +1,15 @@
 import { createContext, useState, useEffect } from 'react';
 import moment from 'moment';
 
-const SystemTimeContext = createContext();
+const SystemContext = createContext();
 
-const SystemTimeProvider = ({ children }) => {
+const SystemProvider = ({ children }) => {
 
-  // State management for current system time
+  // State management for current system time and data
   const [formatDate, setFormatDate] = useState('');
   const [formatMonth, setFormatMonth] = useState('');
   const [formatTime, setFormatTime] = useState('');
+  const [devMode, SetDevMode] = useState(false);
 
   useEffect(() => {
     const updateSystemTime = () => {
@@ -35,16 +36,18 @@ const SystemTimeProvider = ({ children }) => {
   }, []);
 
   return (
-    <SystemTimeContext.Provider
+    <SystemContext.Provider
       value={{
         formatDate,
         formatMonth,
-        formatTime
+        formatTime,
+        devMode,
+        SetDevMode
       }}
     >
       {children}
-    </SystemTimeContext.Provider>
+    </SystemContext.Provider>
   );
 };
 
-export { SystemTimeContext, SystemTimeProvider };
+export { SystemContext, SystemProvider };

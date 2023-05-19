@@ -4,19 +4,19 @@ import Layout from '../components/Layout';
 import '../styles/globals.css';
 
 import { StylesProvider } from '@/contexts/StylesContext';
-import { SystemTimeProvider } from '@/contexts/SystemTimeContext';
+import { SystemProvider } from '@/contexts/SystemContext';
 import { WeatherDataProvider } from '@/contexts/WeatherDataContext';
 
 function App({ Component, pageProps }) {
     return (
       <StylesProvider>
-        <SystemTimeProvider>
+        <SystemProvider>
           <WeatherDataProvider>
             <Layout>
               <Component {...pageProps} />
             </Layout>
           </WeatherDataProvider>
-        </SystemTimeProvider>
+        </SystemProvider>
       </StylesProvider>
     );
   }

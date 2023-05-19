@@ -1,11 +1,11 @@
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import axios from 'axios';
 
 import Home from '@/containers/Home';
 import Details from '@/containers/Details';
 
 import { WeatherDataContext } from '@/contexts/WeatherDataContext';
-import { useWindowSize } from '@/utils/useWindowSize';
 
 export async function getServerSideProps() {
 
@@ -66,39 +66,48 @@ export default function Index({ weatherDataFetch, cities }) {
   // Import weather data from context
   const { SetWeatherData, SetAvaliableCities, SetSelectedCity, selectedCity } = useContext(WeatherDataContext);
 
-  // Get the window size
-  const windowSize = useWindowSize();
+  const router = useRouter();
 
+  // Url handler
+  /* useEffect(() => {
+    const handleRouteChange = (url) => {
+      const newCityName = url.split('/')[1]; // Extract city name from URL
+
+      if (newCityName !== selectedCity) {
+        // Only update if the city has changed
+        router.replace('/', `/${newCityName}`);
+      }
+    };
+
+    router.events.on('routeChangeStart', handleRouteChange);
+
+    return () => {
+      router.events.off('routeChangeStart', handleRouteChange);
+    };
+  }, [selectedCity, router]); */
+
+  // Weatherdata and viewport handler
   useEffect(() => {
     if (weatherDataFetch) {
       SetAvaliableCities(cities);
       SetWeatherData(weatherDataFetch);
     }
 
-    // Set the breakpoint for mobile
     const mobileBreakpoint = 640;
+    const isMobile = window.innerWidth <= mobileBreakpoint;
 
-    // Check screen size and react accordingly
-    windowSize.width > mobileBreakpoint ? SetSelectedCity('London') : SetSelectedCity(null);
-
-  }, [weatherDataFetch, windowSize, SetWeatherData, SetSelectedCity]);
+    if (!isMobile && selectedCity === null) {
+      SetSelectedCity('London');
+    }
+  }, [weatherDataFetch, SetWeatherData, SetAvaliableCities, selectedCity]);
 
   return (
     <div>
-      {selectedCity
-
-        ?
-
-        (
-          <Details />
-        )
-
-        :
-
-        (
-          <Home />
-        )
-      }
+      {selectedCity ? (
+        <Details />
+      ) : (
+        <Home />
+      )}
     </div>
   )
 }

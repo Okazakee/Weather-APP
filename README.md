@@ -25,3 +25,5 @@ To get started, follow these steps:
 3. Install the dependencies: `npm install` or `yarn install`
 4. Run the development server: `npm run dev` or `yarn dev`
 5. Open your web browser and access the application at `http://localhost:3000`
+
+[Weather Icons from Flaticon.com](https://www.flaticon.com/packs/weather-97/2)

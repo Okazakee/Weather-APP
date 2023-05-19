@@ -29,7 +29,7 @@ export default function Home() {
           <FontAwesomeIcon className={HomeStyles.buttons} icon={faSquarePlus} />
           <p className={HomeStyles.p}>Add city</p>
         </div>
-        <div>
+        <div className={HomeStyles.cardWrapper}>
           {weatherData && avaliableCities && avaliableCities.map((city, i) => {
             return (
               <div key={i} onClick={() => SetSelectedCity(city)}>

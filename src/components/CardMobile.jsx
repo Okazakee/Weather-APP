@@ -30,7 +30,7 @@ export default function CardMobile({ cityName, weatherData }) {
                 </div>
                 <div className={CardMobileStyles.cardElement2}>
                 <Image
-                    className="w-20 h-20"
+                    className="w-20 h-20 drop-shadow-xl"
                     src={`/weatherIcons/${weatherData.weatherType}.png`}
                     width={100}
                     height={100}

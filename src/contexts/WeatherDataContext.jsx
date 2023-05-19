@@ -15,7 +15,7 @@ const WeatherDataProvider = ({ children }) => {
 
   useEffect(() => {
     if (weatherData !== null) {
-      console.log("WeatherData updated!", weatherData);
+      console.log("WeatherData updated!");
     }
 
     if (selectedCity !== null) {

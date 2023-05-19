@@ -53,7 +53,7 @@ export default function Details() {
         </div>
         <div className={CityPageStyles.climateInfo}>
           <Image
-            className="w-24 h-24 mt-7"
+            className="w-24 h-24 mt-7 drop-shadow-xl"
             src={`/weatherIcons/${detailsPageData.weatherType}.png`}
             width={100}
             height={100}

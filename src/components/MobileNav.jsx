@@ -1,6 +1,9 @@
 import { useContext } from 'react';
 import { useRouter } from 'next/router';
+
 import { StylesContext } from '@/contexts/StylesContext';
+import { WeatherDataContext } from '@/contexts/WeatherDataContext';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faMagnifyingGlass, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 
@@ -11,12 +14,13 @@ export const MobileNav = () => {
 
     // Import Navbar styles from context
     const { navStyles, updateSelectedIcon } = useContext(StylesContext);
+    const { SetSelectedCity } = useContext(WeatherDataContext);
 
     const navBtnsArray = [faHouse, faMagnifyingGlass, faLocationDot];
 
     const handleButtonClick = (index) => {
         if (index === 0) {
-        router.push('/');
+            SetSelectedCity(null)
         }
         updateSelectedIcon(index);
     };

@@ -17,7 +17,7 @@ const StylesProvider = ({ children }) => {
 
   // TAILWIND STYLES
   const layout = {
-    root: "bg-[#f1f1f1] h-screen font-sans hideTouchInputChrome",
+    root: "bg-[#f1f1f1] min-h-screen font-sans hideTouchInputChrome",
     navbar: "sm:hidden"
   }
 
@@ -39,6 +39,7 @@ const StylesProvider = ({ children }) => {
 
   const HomeStyles = {
     div1: "text-center pt-10 text-[#01175f]",
+    cardWrapper: "pb-10",
     addCityButtonDiv: "cursor-pointer pt-10 pb-7 flex mx-auto w-fit items-center text-[#01175f]",
     h1: " text-[1.6rem] font-bold ",
     buttons: "w-6 h-6 mr-3",
@@ -69,11 +70,11 @@ const StylesProvider = ({ children }) => {
     climateInfo: "flex justify-center my-4",
     tempText: "ml-5 font-bold text-[5.8rem]",
     tempLine: "my-[4.2rem]",
-    dailyCardsWrapper: "ml-2 grid grid-flow-col overflow-x-auto hideScrollbar pb-[5vh]",
+    dailyCardsWrapper: "ml-2 grid grid-flow-col overflow-x-auto hideScrollbar",
   }
 
   const DailyCardStyles = {
-    container: "glassCard p-2 shadow-xl mx-1.5 text-center font-bold maw-w-fit",
+    container: "glassCard p-2 shadow-xl mx-1.5 text-center font-bold maw-w-fit px-2 mb-24",
     dayText: "text-xl pt-3",
     tempText: "text-3xl px-8 py-2"
   }

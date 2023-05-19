@@ -1,16 +1,11 @@
 import { useContext, useEffect } from 'react'
-import Link from 'next/link';
 import axios from 'axios';
 
-import { StylesContext } from '@/contexts/StylesContext';
+import Home from '@/containers/Home';
+import Details from '@/containers/Details';
 
-import CardMobile from '@/components/CardMobile';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSquarePlus } from '@fortawesome/free-solid-svg-icons';
-
-import { cities } from '@/utils/cities';
 import { WeatherDataContext } from '@/contexts/WeatherDataContext';
+import { useWindowSize } from '@/utils/useWindowSize';
 
 export async function getServerSideProps() {
 
@@ -24,18 +19,41 @@ export async function getServerSideProps() {
   }
 
   try {
-    const fetchedWeatherData = await Promise.all(
+
+    /* const fetchForecastData = await Promise.all(
+      cities.map(async (cityName) => {
+        const geoResponse = await axios.get(
+          `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=1&appid=${apiKey}`
+        );
+        const [cityGeoData] = geoResponse.data;
+
+        console.log(`https://api.openweathermap.org/data/2.5/onecall?lat=${cityGeoData.lat}&lon=${cityGeoData.lon}&exclude=current,minutely,hourly&appid=${apiKey}&units=metric`)
+        const forecastResponse = await axios.get(
+          `https://api.openweathermap.org/data/2.5/onecall?lat=${cityGeoData.lat}&lon=${cityGeoData.lon}&exclude=current,minutely,hourly&appid=${apiKey}&units=metric`
+        );
+
+        return forecastResponse.data;
+      })
+    ); */
+
+    const fetchWeatherData = await Promise.all(
       cities.map(async (cityName) => {
         const response = await axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&limit=1&appid=${apiKey}`
+          `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`
         );
         return response.data;
       })
     );
 
+    const weatherDataFetch = fetchWeatherData.reduce((acc, data, index) => {
+      const cityName = cities[index];
+      return { ...acc, [cityName]: data };
+    }, {});
+
     return {
       props: {
-        fetchedWeatherData,
+        weatherDataFetch,
+        cities
       },
     };
   } catch (error) {
@@ -43,41 +61,44 @@ export async function getServerSideProps() {
   }
 }
 
-export default function Home({fetchedWeatherData}) {
-
-  // Import Home styles from context
-  const { HomeStyles } = useContext(StylesContext);
+export default function Index({ weatherDataFetch, cities }) {
 
   // Import weather data from context
-  const { SetWeatherData } = useContext(WeatherDataContext);
+  const { SetWeatherData, SetAvaliableCities, SetSelectedCity, selectedCity } = useContext(WeatherDataContext);
+
+  // Get the window size
+  const windowSize = useWindowSize();
 
   useEffect(() => {
-    SetWeatherData(fetchedWeatherData);
-  }, [fetchedWeatherData])
+    if (weatherDataFetch) {
+      SetAvaliableCities(cities);
+      SetWeatherData(weatherDataFetch);
+    }
+
+    // Set the breakpoint for mobile
+    const mobileBreakpoint = 640;
+
+    // Check screen size and react accordingly
+    windowSize.width > mobileBreakpoint ? SetSelectedCity('London') : SetSelectedCity(null);
+
+  }, [weatherDataFetch, windowSize, SetWeatherData, SetSelectedCity]);
 
   return (
     <div>
-      <div className={HomeStyles.div1}>
-        <h1 className={HomeStyles.h1}>
-          Good morning!
-        </h1>
-        <h1 className={HomeStyles.h1}>
-          User
-        </h1>
-      </div>
-      <div className={HomeStyles.addCityButtonDiv}>
-        <FontAwesomeIcon className={HomeStyles.buttons} icon={faSquarePlus} />
-        <p className={HomeStyles.p}>Add city</p>
-      </div>
-      <div>
-        {cities.map((city, i) => {
-          return (
-            <Link href={`/${city.name}`} key={i}>
-              <CardMobile key={i} cityName={city.name} weatherData={fetchedWeatherData[i]} />
-            </Link>
-          )
-        })}
-      </div>
+      {selectedCity
+
+        ?
+
+        (
+          <Details />
+        )
+
+        :
+
+        (
+          <Home />
+        )
+      }
     </div>
   )
 }

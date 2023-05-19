@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import Image from 'next/image';
 
 import { StylesContext } from '@/contexts/StylesContext';
@@ -10,15 +10,15 @@ export default function CardMobile({ cityName, weatherData }) {
     const { CardMobileStyles, weatherStyle } = useContext(StylesContext);
     const { formatDate, formatMonth, formatTime } = useContext(SystemTimeContext);
 
-    const { weather, main } = weatherData;
+    const {weather, main} = weatherData;
 
-    const filteredWeatherData = {
+    weatherData = {
         weatherType: weather[0].main,
-        temp: Math.floor(main.temp - 273.15)
+        temp: Math.floor(main.temp)
       };
 
     return (
-        <div className={`${CardMobileStyles.cardContainer} ${weatherStyle[filteredWeatherData.weatherType]}`}>
+        <div className={`${CardMobileStyles.cardContainer} ${weatherStyle[weatherData.weatherType]}`}>
             <div className={CardMobileStyles.cardWrapper}>
                 <div className={CardMobileStyles.cardElement}>
                     <div className={CardMobileStyles.leftInfoWrapper}>
@@ -28,18 +28,18 @@ export default function CardMobile({ cityName, weatherData }) {
                         <div className={CardMobileStyles.currentHour}>{formatTime}</div>
                     </div>
                 </div>
-                <div className={CardMobileStyles.cardElement}>
+                <div className={CardMobileStyles.cardElement2}>
                 <Image
                     className="w-20 h-20"
-                    src={`/weatherIcons/${filteredWeatherData.weatherType}.png`}
+                    src={`/weatherIcons/${weatherData.weatherType}.png`}
                     width={100}
                     height={100}
-                    alt={`${filteredWeatherData.weatherType}_weather_icon`}
+                    alt={`${weatherData.weatherType}_weather_icon`}
                     quality={100}
                 />
                 </div>
-                <div className={CardMobileStyles.cardElement}>
-                <h1 className={CardMobileStyles.tempText}>{filteredWeatherData.temp + "°"}</h1>
+                <div className={CardMobileStyles.cardElement3}>
+                    <h1 className={CardMobileStyles.tempText}>{weatherData.temp + "°"}</h1>
                 </div>
             </div>
         </div>

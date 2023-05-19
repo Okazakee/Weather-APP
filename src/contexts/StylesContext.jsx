@@ -22,10 +22,13 @@ const StylesProvider = ({ children }) => {
   }
 
   const weatherStyle = {
-    Clouds: "bg-gradient-to-r from-[#575f75] to-[#8f9eae]",
-    rainy: "bg-gradient-to-r from-[#577ce8] to-[#72b0f3]",
-    Sunny: "bg-gradient-to-r from-[#577ce8] to-[#72b0f3]",
-    Sunshower: "bg-gradient-to-r from-[#122f70] to-[#4a85c9]"
+    Rain: "bg-gradient-to-r from-[#575f64] to-[#8f9eae]",
+    Clouds: "bg-gradient-to-r from-[#6b7f9f] to-[#99aebf]",
+    Clear: "bg-gradient-to-r from-[#577ce8] to-[#32b0f3]",
+    Drizzle: "bg-gradient-to-r from-[#122f70] to-[#4a85c9]",
+    Snow: "bg-gradient-to-r from-[#e8f7fd] to-[#d1ecf8]",
+    Thunderstorm: "bg-gradient-to-r from-[#424874] to-[#9eabb2]",
+    Atmosphere: "bg-gradient-to-r from-[#9fa4b1] to-[#e3e6ea]",
   };
 
   const navStyles = {
@@ -36,7 +39,7 @@ const StylesProvider = ({ children }) => {
 
   const HomeStyles = {
     div1: "text-center pt-10 text-[#01175f]",
-    addCityButtonDiv: "cursor-pointer pt-10 pb-7 flex justify-center items-center text-[#01175f]",
+    addCityButtonDiv: "cursor-pointer pt-10 pb-7 flex mx-auto w-fit items-center text-[#01175f]",
     h1: " text-[1.6rem] font-bold ",
     buttons: "w-6 h-6 mr-3",
     p: "text-lg font-bold"
@@ -45,12 +48,14 @@ const StylesProvider = ({ children }) => {
   const CardMobileStyles = {
     cardContainer: "cursor-pointer py-[1.2rem] my-[1rem] mx-auto w-[90%] bg-gray-400 rounded-3xl text-center drop-shadow-xl",
     cardWrapper: "flex justify-around",
-    cardElement: "flex justify-center items-center basis-1/3 text-white",
+    cardElement: "flex justify-start items-center basis-1/3 text-white",
+    cardElement2: "flex justify-center items-center basis-1/3 text-white",
+    cardElement3: "flex justify-center items-center basis-1/3 text-white",
     leftInfoWrapper: "flex flex-col text-left ml-4",
     cityName: "text-2xl font-bold",
     currentDate: "text-xs font-semibold",
     currentHour: "text-[0.7rem] font-light mt-2",
-    tempText: "font-bold text-5xl"
+    tempText: "font-bold text-5xl text-right"
   }
 
   const CityPageStyles = {

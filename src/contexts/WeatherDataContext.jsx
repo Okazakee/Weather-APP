@@ -4,21 +4,41 @@ const WeatherDataContext = createContext();
 
 const WeatherDataProvider = ({ children }) => {
 
-  // State management for current weather data
-  const [weatherData, SetWeatherData] = useState();
+  const [avaliableCities, SetAvaliableCities] = useState(null);
 
-  /* useEffect(() => {
-    if (weatherData !== undefined) {
-      // Perform the desired action or code here when weatherData is not null
-      console.log('Weather data is available:');
+  const [selectedCity, SetSelectedCity] = useState(null);
+
+  // State management for current weather data
+  const [weatherData, SetWeatherData] = useState(null);
+  const [forecastData, SetForecastData] = useState(null);
+  const [detailsPageData, SetDetailsPageData] = useState(null);
+
+  useEffect(() => {
+    if (weatherData !== null) {
+      console.log("WeatherData updated!", weatherData);
     }
-  }, [weatherData]); */
+
+    if (selectedCity !== null) {
+      const detailsPageData = {
+        selectedCity: selectedCity,
+        weatherType: weatherData[selectedCity].weather[0].main,
+        temperature: Math.floor(weatherData[selectedCity].main.temp)
+      }
+
+      SetDetailsPageData(detailsPageData);
+    }
+  }, [weatherData, selectedCity]);
 
   return (
     <WeatherDataContext.Provider
       value={{
+        avaliableCities,
+        SetAvaliableCities,
         weatherData,
-        SetWeatherData
+        SetWeatherData,
+        selectedCity,
+        SetSelectedCity,
+        detailsPageData
       }}
     >
       {children}

@@ -1,5 +1,5 @@
-import { useRouter } from 'next/router';
 import { useContext } from 'react';
+import { useRouter } from 'next/router';
 import { StylesContext } from '@/contexts/StylesContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faMagnifyingGlass, faLocationDot } from '@fortawesome/free-solid-svg-icons';
@@ -29,7 +29,7 @@ export const MobileNav = () => {
             key={i}
             onClick={() => handleButtonClick(i)}
             >
-            <FontAwesomeIcon className={navStyles.buttons(i)} icon={button} />
+                <FontAwesomeIcon className={navStyles.buttons(i)} icon={button} />
             </div>
         ))}
         </div>

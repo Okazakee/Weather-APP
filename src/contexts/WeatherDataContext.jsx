@@ -8,10 +8,12 @@ const WeatherDataProvider = ({ children }) => {
   const [selectedCity, SetSelectedCity] = useState(null);
   const [currentWeather, SetCurrentWeather] = useState(null);
   const [weeklyForecast, SetWeeklyForecast] = useState(null);
+  const [hourlyForecast, SetHourlyForecast] = useState(null);
   const [detailsPageData, SetDetailsPageData] = useState(null);
   const [dailyCardData, SetDailyCardData] = useState(null);
+  const [hourlyLineData, SetHourlyLineData] = useState(null);
 
-  // detailsPageData handler
+  // pages and component data handler
   useEffect(() => {
     if (selectedCity !== null) {
       const detailsPageData = {
@@ -21,11 +23,11 @@ const WeatherDataProvider = ({ children }) => {
       };
 
       const dailyCardData = weeklyForecast[selectedCity];
+      const hourlyLineData = hourlyForecast[selectedCity].list;
 
       SetDetailsPageData(detailsPageData);
       SetDailyCardData(dailyCardData);
-
-      console.log(dailyCardData, detailsPageData);
+      SetHourlyLineData(hourlyLineData);
     }
   }, [currentWeather, weeklyForecast, selectedCity]);
 
@@ -40,9 +42,13 @@ const WeatherDataProvider = ({ children }) => {
         SetSelectedCity,
         weeklyForecast,
         SetWeeklyForecast,
+        hourlyForecast,
+        SetHourlyForecast,
         dailyCardData,
         SetDailyCardData,
         detailsPageData,
+        hourlyLineData,
+        SetHourlyLineData
       }}
     >
       {children}

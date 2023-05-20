@@ -72,12 +72,11 @@ export default function Details() {
         </p>
       </div>
       <div className={DetailsPageStyles.tempLine}>
-        <HourlyTempLine />
+        <HourlyTempLine currentTemp={detailsPageData.temperature} />
       </div>
       <div className={DetailsPageStyles.dailyCardsWrapper}>
         {dailyCardData &&
           dailyCardData.map((dayForecastData, i) => {
-            console.log(Math.floor(dayForecastData.temp))
             return (
               <DailyCard
                 key={i}

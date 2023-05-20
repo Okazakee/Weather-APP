@@ -8,7 +8,7 @@ import { WeatherDataContext } from "@/contexts/WeatherDataContext";
 
 export async function getServerSideProps() {
   // Hardcoded 3 main cities to check
-  const cities = ["London", "Turin", "Rome", "Dubai"];
+  const cities = ["London", "Turin", "Rome"];
 
   const OW_apiKey = process.env.OPENWEATHER_API_KEY;
   const WB_apiKey = process.env.WEATHERBIT_API_KEY;
@@ -126,11 +126,13 @@ export default function Index({
   cities,
   currentWeatherData,
   weeklyForecastData,
+  hourlyForecastData
 }) {
   // Import weather data from context
   const {
     SetCurrentWeather,
     SetWeeklyForecast,
+    SetHourlyForecast,
     SetAvaliableCities,
     SetSelectedCity,
     selectedCity,
@@ -138,10 +140,11 @@ export default function Index({
 
   // Weatherdata and viewport handler
   useEffect(() => {
-    if (currentWeatherData && weeklyForecastData) {
+    if (currentWeatherData && weeklyForecastData && hourlyForecastData) {
       SetAvaliableCities(cities);
       SetCurrentWeather(currentWeatherData);
       SetWeeklyForecast(weeklyForecastData);
+      SetHourlyForecast(hourlyForecastData);
     }
 
     const mobileBreakpoint = 640;
@@ -155,6 +158,7 @@ export default function Index({
   }, [
     currentWeatherData,
     weeklyForecastData,
+    hourlyForecastData,
     SetCurrentWeather,
     SetWeeklyForecast,
     SetAvaliableCities,

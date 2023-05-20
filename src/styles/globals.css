@@ -3,25 +3,25 @@
 @tailwind utilities;
 
 @layer components {
-    .glassCard {
-        /* From https://css.glass */
-        background: rgba(255, 255, 255, 0.173);
-        border-radius: 16px;
-        backdrop-filter: blur(1.4px);
-        -webkit-backdrop-filter: blur(1.4px);
-    }
-
-    .hideScrollbar::-webkit-scrollbar {
-        display: none;
-      }
-
-    /* Hide scrollbar for IE, Edge and Firefox */
-    .hideScrollbar {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-    }
-
-    .hideTouchInputChrome {
-        -webkit-tap-highlight-color: transparent;
-    }
+  .glassCard {
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.173);
+    border-radius: 16px;
+    backdrop-filter: blur(1.4px);
+    -webkit-backdrop-filter: blur(1.4px);
   }
+
+  .hideScrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .hideScrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .hideTouchInputChrome {
+    -webkit-tap-highlight-color: transparent;
+  }
+}

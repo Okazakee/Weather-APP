@@ -1,9 +1,8 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect } from "react";
 
 const WeatherDataContext = createContext();
 
 const WeatherDataProvider = ({ children }) => {
-
   // State management for current weather data
   const [avaliableCities, SetAvaliableCities] = useState(null);
   const [selectedCity, SetSelectedCity] = useState(null);
@@ -14,21 +13,19 @@ const WeatherDataProvider = ({ children }) => {
 
   // detailsPageData handler
   useEffect(() => {
-
     if (selectedCity !== null) {
-
       const detailsPageData = {
         selectedCity: selectedCity,
         weatherType: currentWeather[selectedCity].weather[0].main,
-        temperature: Math.floor(currentWeather[selectedCity].main.temp)
-      }
+        temperature: Math.floor(currentWeather[selectedCity].main.temp),
+      };
 
       const dailyCardData = weeklyForecast[selectedCity];
 
       SetDetailsPageData(detailsPageData);
       SetDailyCardData(dailyCardData);
 
-      console.log(dailyCardData, detailsPageData)
+      console.log(dailyCardData, detailsPageData);
     }
   }, [currentWeather, weeklyForecast, selectedCity]);
 
@@ -45,7 +42,7 @@ const WeatherDataProvider = ({ children }) => {
         SetWeeklyForecast,
         dailyCardData,
         SetDailyCardData,
-        detailsPageData
+        detailsPageData,
       }}
     >
       {children}

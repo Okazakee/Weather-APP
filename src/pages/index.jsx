@@ -1,14 +1,14 @@
-import { useContext, useEffect } from 'react';
-import axios from 'axios';
+import { useContext, useEffect } from "react";
+import axios from "axios";
 
-import Home from '@/containers/Home';
-import Details from '@/containers/Details';
+import Home from "@/containers/Home";
+import Details from "@/containers/Details";
 
-import { WeatherDataContext } from '@/contexts/WeatherDataContext';
+import { WeatherDataContext } from "@/contexts/WeatherDataContext";
 
 export async function getServerSideProps() {
   // Hardcoded 3 main cities to check
-  const cities = ['London', 'Turin', 'Rome', 'Dubai'];
+  const cities = ["London", "Turin", "Rome", "Dubai"];
 
   const OW_apiKey = process.env.OPENWEATHER_API_KEY;
   const WB_apiKey = process.env.WEATHERBIT_API_KEY;
@@ -17,7 +17,7 @@ export async function getServerSideProps() {
   const hourlyForecastFallback = process.env.HOURLY_FALLBACK_ENDPOINT;
 
   if (!OW_apiKey) {
-    throw new Error('Missing API key');
+    throw new Error("Missing API key");
   }
 
   try {
@@ -34,12 +34,15 @@ export async function getServerSideProps() {
     // Reconstruct fetched data adding name property to each object
     let currentWeatherData;
     try {
-      currentWeatherData = fetchCurrentWeatherData.reduce((acc, data, index) => {
-        const cityName = cities[index];
-        return { ...acc, [cityName]: data };
-      }, {});
+      currentWeatherData = fetchCurrentWeatherData.reduce(
+        (acc, data, index) => {
+          const cityName = cities[index];
+          return { ...acc, [cityName]: data };
+        },
+        {}
+      );
     } catch (error) {
-      console.error('Error reconstructing current weather data:', error);
+      console.error("Error reconstructing current weather data:", error);
       // Use the fallback URI here
       const fallbackResponse = await axios.get(currentWeatherFallback);
       currentWeatherData = fallbackResponse.data;
@@ -54,7 +57,7 @@ export async function getServerSideProps() {
           );
           return response.data;
         } catch (error) {
-          console.error('Error fetching weather data:', error);
+          console.error("Error fetching weather data:", error);
           // Use the fallback URI here
           const fallbackResponse = await axios.get(weeklyForecastFallback);
           return fallbackResponse.data;
@@ -62,10 +65,13 @@ export async function getServerSideProps() {
       })
     );
 
-    const weeklyForecastData = fetchWeeklyForecast.reduce((acc, data, index) => {
-      const cityName = cities[index];
-      return { ...acc, [cityName]: data.data };
-    }, {});
+    const weeklyForecastData = fetchWeeklyForecast.reduce(
+      (acc, data, index) => {
+        const cityName = cities[index];
+        return { ...acc, [cityName]: data.data };
+      },
+      {}
+    );
 
     return {
       props: {
@@ -75,14 +81,23 @@ export async function getServerSideProps() {
       },
     };
   } catch (error) {
-    console.error('Error fetching weather data:', error);
+    console.error("Error fetching weather data:", error);
   }
 }
 
-export default function Index({ cities, currentWeatherData, weeklyForecastData }) {
-
+export default function Index({
+  cities,
+  currentWeatherData,
+  weeklyForecastData,
+}) {
   // Import weather data from context
-  const { SetCurrentWeather, SetWeeklyForecast, SetAvaliableCities, SetSelectedCity, selectedCity } = useContext(WeatherDataContext);
+  const {
+    SetCurrentWeather,
+    SetWeeklyForecast,
+    SetAvaliableCities,
+    SetSelectedCity,
+    selectedCity,
+  } = useContext(WeatherDataContext);
 
   // Weatherdata and viewport handler
   useEffect(() => {
@@ -96,23 +111,18 @@ export default function Index({ cities, currentWeatherData, weeklyForecastData }
     const isMobile = window.innerWidth <= mobileBreakpoint;
 
     if (true) {
-    if (!isMobile && selectedCity === null) {
-      SetSelectedCity('London');
+      if (!isMobile && selectedCity === null) {
+        SetSelectedCity("London");
+      }
     }
-  }}, [currentWeatherData,
-      weeklyForecastData,
-      SetCurrentWeather,
-      SetWeeklyForecast,
-      SetAvaliableCities,
-      selectedCity]);
+  }, [
+    currentWeatherData,
+    weeklyForecastData,
+    SetCurrentWeather,
+    SetWeeklyForecast,
+    SetAvaliableCities,
+    selectedCity,
+  ]);
 
-  return (
-    <div>
-      {selectedCity ? (
-        <Details />
-      ) : (
-        <Home />
-      )}
-    </div>
-  )
+  return <div>{selectedCity ? <Details /> : <Home />}</div>;
 }

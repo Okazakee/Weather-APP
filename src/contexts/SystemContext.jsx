@@ -1,22 +1,21 @@
-import { createContext, useState, useEffect } from 'react';
-import moment from 'moment';
+import { createContext, useState, useEffect } from "react";
+import moment from "moment";
 
 const SystemContext = createContext();
 
 const SystemProvider = ({ children }) => {
-
   // State management for current system time and data
-  const [formatDate, setFormatDate] = useState('');
-  const [formatMonth, setFormatMonth] = useState('');
-  const [formatTime, setFormatTime] = useState('');
+  const [formatDate, setFormatDate] = useState("");
+  const [formatMonth, setFormatMonth] = useState("");
+  const [formatTime, setFormatTime] = useState("");
   const [devMode, SetDevMode] = useState(false);
 
   useEffect(() => {
     const updateSystemTime = () => {
       const currentDate = moment();
-      const formattedDate = currentDate.format('dddd D,');
-      const formattedMonth = currentDate.format('MMM');
-      const formattedTime = currentDate.format('hh:mm A');
+      const formattedDate = currentDate.format("dddd D,");
+      const formattedMonth = currentDate.format("MMM");
+      const formattedTime = currentDate.format("hh:mm A");
 
       setFormatDate(formattedDate);
       setFormatMonth(formattedMonth);
@@ -42,7 +41,7 @@ const SystemProvider = ({ children }) => {
         formatMonth,
         formatTime,
         devMode,
-        SetDevMode
+        SetDevMode,
       }}
     >
       {children}

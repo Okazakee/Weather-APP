@@ -57,6 +57,33 @@ export async function getServerSideProps() {
       currentWeatherData = fallbackResponse.data;
     }
 
+    // Fetch hourly forecast data for each city in cities array
+    const fetchHourlyForecast = await Promise.all(
+      cities.map(async (cityName) => {
+        const response = await axios.get(
+          `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${OW_apiKey}&units=metric&cnt=12`
+        );
+        return response.data;
+      })
+    );
+
+    // Reconstruct fetched data adding name property to each object
+    let hourlyForecastData;
+    try {
+      hourlyForecastData = fetchHourlyForecast.reduce(
+        (acc, data, index) => {
+          const cityName = cities[index];
+          return { ...acc, [cityName]: data };
+        },
+        {}
+      );
+    } catch (error) {
+      console.error("Error reconstructing current weather data:", error);
+      // Use the fallback URI here
+      const fallbackResponse = await axios.get(hourlyForecastFallback);
+      hourlyForecastData = fallbackResponse.data;
+    }
+
     // Fetch weekly forecast data for each city in cities array
     const fetchWeeklyForecast = await Promise.all(
       cities.map(async (cityName) => {
@@ -84,9 +111,10 @@ export async function getServerSideProps() {
 
     return {
       props: {
+        cities,
         currentWeatherData,
         weeklyForecastData,
-        cities,
+        hourlyForecastData
       },
     };
   } catch (error) {

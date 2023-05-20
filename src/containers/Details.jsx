@@ -77,6 +77,7 @@ export default function Details() {
       <div className={DetailsPageStyles.dailyCardsWrapper}>
         {dailyCardData &&
           dailyCardData.map((dayForecastData, i) => {
+            console.log(Math.floor(dayForecastData.temp))
             return (
               <DailyCard
                 key={i}

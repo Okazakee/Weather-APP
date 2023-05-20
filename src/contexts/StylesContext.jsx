@@ -105,6 +105,10 @@ const StylesProvider = ({ children }) => {
     p: "w-16 text-[0.8rem]",
   };
 
+  const GiantCardStyles = {
+    container: "rounded-3xl border border-black h-[100%]",
+  };
+
   return (
     <StylesContext.Provider
       value={{
@@ -121,6 +125,7 @@ const StylesProvider = ({ children }) => {
         DetailsPageStyles,
         DailyCardStyles,
         HourlyLineStyles,
+        GiantCardStyles
       }}
     >
       {children}

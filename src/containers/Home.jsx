@@ -7,6 +7,7 @@ import { WeatherDataContext } from "@/contexts/WeatherDataContext";
 import { StylesContext } from "@/contexts/StylesContext";
 
 import CardMobile from "@/components/CardMobile";
+import GiantCard from "@/components/GiantCard";
 
 export default function Home() {
   // Import Home styles from context
@@ -20,7 +21,7 @@ export default function Home() {
       {!isMobile &&
       <div className={HomeStyles.firstZone}>
         <div className={HomeStyles.topLeft}>
-          giant card zone
+          <GiantCard />
         </div>
         <div className={HomeStyles.downLeft}>
           <div className={HomeStyles.todayWidget}>

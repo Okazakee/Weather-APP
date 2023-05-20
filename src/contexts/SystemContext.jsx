@@ -8,7 +8,7 @@ const SystemProvider = ({ children }) => {
   const [formatDate, setFormatDate] = useState("");
   const [formatMonth, setFormatMonth] = useState("");
   const [formatTime, setFormatTime] = useState("");
-  const [devMode, SetDevMode] = useState(false);
+  const [isMobile, SetIsMobile] = useState(null);
 
   useEffect(() => {
     const updateSystemTime = () => {
@@ -40,8 +40,8 @@ const SystemProvider = ({ children }) => {
         formatDate,
         formatMonth,
         formatTime,
-        devMode,
-        SetDevMode,
+        isMobile,
+        SetIsMobile,
       }}
     >
       {children}

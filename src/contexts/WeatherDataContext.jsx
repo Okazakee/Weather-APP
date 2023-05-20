@@ -48,7 +48,7 @@ const WeatherDataProvider = ({ children }) => {
         SetDailyCardData,
         detailsPageData,
         hourlyLineData,
-        SetHourlyLineData
+        SetHourlyLineData,
       }}
     >
       {children}

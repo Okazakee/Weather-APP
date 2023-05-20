@@ -5,6 +5,7 @@ import Home from "@/containers/Home";
 import Details from "@/containers/Details";
 
 import { WeatherDataContext } from "@/contexts/WeatherDataContext";
+import { SystemContext } from "@/contexts/SystemContext";
 
 export async function getServerSideProps() {
   // Hardcoded 3 main cities to check
@@ -70,13 +71,10 @@ export async function getServerSideProps() {
     // Reconstruct fetched data adding name property to each object
     let hourlyForecastData;
     try {
-      hourlyForecastData = fetchHourlyForecast.reduce(
-        (acc, data, index) => {
-          const cityName = cities[index];
-          return { ...acc, [cityName]: data };
-        },
-        {}
-      );
+      hourlyForecastData = fetchHourlyForecast.reduce((acc, data, index) => {
+        const cityName = cities[index];
+        return { ...acc, [cityName]: data };
+      }, {});
     } catch (error) {
       console.error("Error reconstructing current weather data:", error);
       // Use the fallback URI here
@@ -114,7 +112,7 @@ export async function getServerSideProps() {
         cities,
         currentWeatherData,
         weeklyForecastData,
-        hourlyForecastData
+        hourlyForecastData,
       },
     };
   } catch (error) {
@@ -126,7 +124,7 @@ export default function Index({
   cities,
   currentWeatherData,
   weeklyForecastData,
-  hourlyForecastData
+  hourlyForecastData,
 }) {
   // Import weather data from context
   const {
@@ -138,6 +136,8 @@ export default function Index({
     selectedCity,
   } = useContext(WeatherDataContext);
 
+  const { SetIsMobile, isMobile } = useContext(SystemContext);
+
   // Weatherdata and viewport handler
   useEffect(() => {
     if (currentWeatherData && weeklyForecastData && hourlyForecastData) {
@@ -148,12 +148,10 @@ export default function Index({
     }
 
     const mobileBreakpoint = 640;
-    const isMobile = window.innerWidth <= mobileBreakpoint;
+    SetIsMobile(window.innerWidth <= mobileBreakpoint);
 
-    if (true) {
-      if (!isMobile && selectedCity === null) {
-        SetSelectedCity("London");
-      }
+    if (!isMobile && selectedCity === null) {
+      SetSelectedCity("London");
     }
   }, [
     currentWeatherData,

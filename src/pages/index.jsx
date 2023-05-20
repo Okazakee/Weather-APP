@@ -5,7 +5,7 @@ import Home from "@/containers/Home";
 import Details from "@/containers/Details";
 
 import { WeatherDataContext } from "@/contexts/WeatherDataContext";
-import { SystemContext } from "@/contexts/SystemContext";
+import { StylesContext } from "@/contexts/StylesContext";
 
 export async function getServerSideProps() {
   // Hardcoded 3 main cities to check
@@ -136,7 +136,7 @@ export default function Index({
     selectedCity,
   } = useContext(WeatherDataContext);
 
-  const { SetIsMobile, isMobile } = useContext(SystemContext);
+  const { SetIsMobile, isMobile } = useContext(StylesContext);
 
   // Weatherdata and viewport handler
   useEffect(() => {
@@ -161,7 +161,17 @@ export default function Index({
     SetWeeklyForecast,
     SetAvaliableCities,
     selectedCity,
+    isMobile,
+    SetIsMobile
   ]);
 
-  return <div>{selectedCity ? <Details /> : <Home />}</div>;
+  return (
+    <div>
+      {isMobile ?
+        selectedCity ? <Details /> : <Home />
+      :
+        <Home />
+      }
+    </div>
+  );
 }

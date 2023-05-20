@@ -5,6 +5,7 @@ const StylesContext = createContext();
 const StylesProvider = ({ children }) => {
   // State management for navbar button selection
   const [selectedIcons, SetSelectedIcons] = useState([true, false, false]);
+  const [isMobile, SetIsMobile] = useState(true);
 
   // Navbar button selection handler
   const updateSelectedIcon = (index) => {
@@ -16,7 +17,7 @@ const StylesProvider = ({ children }) => {
 
   // TAILWIND STYLES
   const layout = {
-    root: "bg-[#f1f1f1] min-h-screen font-sans hideTouchInputChrome",
+    root: `bg-[#f1f1f1] min-h-screen mx-auto font-sans hideTouchInputChrome ${isMobile ? "" : ""}`,
     navbar: "sm:hidden",
   };
 
@@ -44,18 +45,27 @@ const StylesProvider = ({ children }) => {
   };
 
   const HomeStyles = {
-    div1: "text-center pt-10 text-[#01175f]",
-    cardWrapper: "pb-28",
+    homeWrapper: `${isMobile ? "" : "flex max-w-7xl mx-auto pt-10"}`,
+    firstZone: `basis-2/3`,
+    topLeft: "h-[50%] border border-green-500",
+    downLeft: "flex h-[50%] border border-blue-500",
+    todayWidget: "basis-1/2 border border-yellow-500",
+    weekWidget: "basis-1/2 border border-brown-500",
+    downRightContainer: "border border-teal-500",
+    downRightSearch: " border border-green-500 py-10",
+    downRightLocation: " border border-blue-500 py-10",
+    secondZone: `border border-red-500 ml-auto basis-1/3`,
+    div1: `${isMobile ? "text-center pt-10 text-[#01175f]" : "hidden"}`,
+    cardWrapper: ` ${isMobile ? "pb-28" : ""}`,
     addCityButtonDiv:
-      "cursor-pointer pt-10 pb-7 flex mx-auto w-fit items-center text-[#01175f]",
+      `cursor-pointer flex items-center w-fit mx-auto text-[#01175f] ${isMobile ? "pt-10 pb-7" : "mb-10"}`,
     h1: " text-[1.6rem] font-bold ",
     buttons: "w-6 h-6 mr-3",
     p: "text-lg font-bold",
   };
 
   const CardMobileStyles = {
-    cardContainer:
-      "cursor-pointer py-[1.2rem] my-[1rem] mx-auto w-[90%] bg-gray-400 rounded-3xl text-center drop-shadow-xl",
+    cardContainer: `cursor-pointer py-[1.2rem] my-[1rem] bg-gray-400 rounded-3xl text-center drop-shadow-xl mx-auto ${isMobile ? "w-[90%]" : "ml-auto w-[80%]"}`,
     cardWrapper: "flex justify-around",
     cardElement: "flex justify-start items-center basis-1/3 text-white",
     cardElement2: "flex justify-center items-center basis-1/3 text-white",
@@ -100,6 +110,8 @@ const StylesProvider = ({ children }) => {
       value={{
         selectedIcons,
         SetSelectedIcons,
+        isMobile,
+        SetIsMobile,
         updateSelectedIcon,
         layout,
         weatherStyle,

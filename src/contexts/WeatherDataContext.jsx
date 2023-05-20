@@ -16,10 +16,8 @@ const WeatherDataProvider = ({ children }) => {
   // pages and component data handler
   useEffect(() => {
     if (selectedCity !== null) {
-
       const dailyCardData = weeklyForecast[selectedCity];
       const hourlyLineData = hourlyForecast[selectedCity].list;
-      const giantCardImage = currentWeather[selectedCity].img;
       const detailsPageData = {
         selectedCity: selectedCity,
         weatherType: currentWeather[selectedCity].weather[0].main,
@@ -30,7 +28,7 @@ const WeatherDataProvider = ({ children }) => {
       SetDailyCardData(dailyCardData);
       SetHourlyLineData(hourlyLineData);
     }
-  }, [currentWeather, weeklyForecast, selectedCity]);
+  }, [currentWeather, weeklyForecast, selectedCity, hourlyForecast]);
 
   return (
     <WeatherDataContext.Provider

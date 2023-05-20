@@ -38,7 +38,7 @@ const SystemProvider = ({ children }) => {
       value={{
         formatDate,
         formatMonth,
-        formatTime
+        formatTime,
       }}
     >
       {children}

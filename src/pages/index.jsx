@@ -1,4 +1,5 @@
 import { useContext, useEffect } from "react";
+import { createClient } from "pexels";
 import axios from "axios";
 
 import Home from "@/containers/Home";
@@ -12,14 +13,14 @@ export async function getServerSideProps() {
   const cities = ["London", "Turin", "Rome"];
 
   const originalEdgeEndpoint = process.env.EDGE_CONFIG;
-  const OW_apiKey = process.env.OPENWEATHER_API_KEY;
-  const WB_apiKey = process.env.WEATHERBIT_API_KEY;
-  const U_apiKey = process.env.UNSPLASH_ACCESS_KEY
+  const openWeatherApiKey = process.env.OPENWEATHER_API_KEY;
+  const weatherBitApiKey = process.env.WEATHERBIT_API_KEY;
+  const pexelsApiKey = process.env.PEXELS_API_KEY;
 
   // Find the index of the "?" in the URI
   const index = originalEdgeEndpoint.indexOf("?");
 
-  // Divide the URI into two parts
+  // Divide the URI into two partscityName
   const firstPart = originalEdgeEndpoint.slice(0, index);
   const secondPart = originalEdgeEndpoint.slice(index);
 
@@ -27,27 +28,39 @@ export async function getServerSideProps() {
   const weeklyForecastFallback = `${firstPart}/item/weeklyForecast${secondPart}`;
   const hourlyForecastFallback = `${firstPart}/item/hourlyForecast${secondPart}`;
 
-  if (!OW_apiKey) {
+  if (!openWeatherApiKey || !weatherBitApiKey || !pexelsApiKey) {
     throw new Error("Missing API key");
   }
+
+  const pexelsClient = createClient(pexelsApiKey);
 
   try {
     // Fetch current weather data for each city in cities array
     const fetchCurrentWeatherData = await Promise.all(
       cities.map(async (cityName) => {
         const weatherResponse = await axios.get(
-          `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${OW_apiKey}&units=metric`
+          `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${openWeatherApiKey}&units=metric`
         );
 
-        const unsplashResponse = await axios.get(
-          `https://api.unsplash.com/photos/random/?query=${cityName}&client_id=${U_apiKey}&orientation=landscape`
-        );
+        let imageUrl =
+          "https://www.startpage.com/av/proxy-image?piurl=https%3A%2F%2Fwww.elegantthemes.com%2Fblog%2Fwp-content%2Fuploads%2F2020%2F08%2F000-http-error-codes.png"; //fallback if fails
 
-        const imageUrl = unsplashResponse.data.urls.regular;
+        try {
+          const pexelsResponse = await pexelsClient.photos.search({
+            query: cityName,
+            per_page: 1,
+            orientation: "landscape",
+            size: "medium",
+          });
+
+          imageUrl = pexelsResponse.photos[0].src.landscape;
+        } catch (error) {
+          console.error("Failed to fetch image:", error);
+        }
 
         const weatherData = {
           ...weatherResponse.data,
-          imageUrl
+          imageUrl,
         };
 
         return { [cityName]: weatherData };
@@ -58,10 +71,14 @@ export async function getServerSideProps() {
     try {
       currentWeatherData = fetchCurrentWeatherData.reduce((acc, data) => {
         const cityName = Object.keys(data)[0];
-        return { ...acc, ...data, [cityName]: { ...data[cityName], imageUrl: data[cityName].imageUrl } };
+        return {
+          ...acc,
+          ...data,
+          [cityName]: { ...data[cityName], imageUrl: data[cityName].imageUrl },
+        };
       }, {});
     } catch (error) {
-      console.error("Error reconstructing current weather data:", error);
+      console.error("Error reconstructing current weather data");
       // Use the fallback URI here
       const fallbackResponse = await axios.get(currentWeatherFallback);
       currentWeatherData = fallbackResponse.data;
@@ -71,7 +88,7 @@ export async function getServerSideProps() {
     const fetchHourlyForecast = await Promise.all(
       cities.map(async (cityName) => {
         const response = await axios.get(
-          `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${OW_apiKey}&units=metric&cnt=12`
+          `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${openWeatherApiKey}&units=metric&cnt=12`
         );
         return response.data;
       })
@@ -85,7 +102,7 @@ export async function getServerSideProps() {
         return { ...acc, [cityName]: data };
       }, {});
     } catch (error) {
-      console.error("Error reconstructing current weather data:", error);
+      console.error("Error reconstructing hourly forecast data");
       // Use the fallback URI here
       const fallbackResponse = await axios.get(hourlyForecastFallback);
       hourlyForecastData = fallbackResponse.data;
@@ -96,11 +113,11 @@ export async function getServerSideProps() {
       cities.map(async (cityName) => {
         try {
           const response = await axios.get(
-            `https://api.weatherbit.io/v2.0/forecast/daily?city=${cityName}&key=${WB_apiKey}&units=M`
+            `https://api.weatherbit.io/v2.0/forecast/daily?city=${cityName}&key=${weatherBitApiKey}&units=M`
           );
           return response.data;
         } catch (error) {
-          console.error("Error fetching weather data:", error);
+          console.error("Error fetching weekly forecast data:");
           // Use the fallback URI here
           const fallbackResponse = await axios.get(weeklyForecastFallback);
           return fallbackResponse.data;
@@ -125,7 +142,7 @@ export async function getServerSideProps() {
       },
     };
   } catch (error) {
-    console.error("Error fetching weather data:", error);
+    console.error("Error fetching data:", error);
   }
 }
 
@@ -166,21 +183,18 @@ export default function Index({
     currentWeatherData,
     weeklyForecastData,
     hourlyForecastData,
+    cities,
     SetCurrentWeather,
     SetWeeklyForecast,
     SetAvaliableCities,
     selectedCity,
     isMobile,
-    SetIsMobile
+    SetIsMobile,
+    SetHourlyForecast,
+    SetSelectedCity,
   ]);
 
   return (
-    <div>
-      {isMobile ?
-        selectedCity ? <Details /> : <Home />
-      :
-        <Home />
-      }
-    </div>
+    <div>{isMobile ? selectedCity ? <Details /> : <Home /> : <Home />}</div>
   );
 }

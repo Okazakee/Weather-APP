@@ -18,20 +18,17 @@ export default function Home() {
 
   return (
     <div className={HomeStyles.homeWrapper}>
-      {!isMobile &&
-      <div className={HomeStyles.firstZone}>
-        <div className={HomeStyles.topLeft}>
-          <GiantCard />
-        </div>
-        <div className={HomeStyles.downLeft}>
-          <div className={HomeStyles.todayWidget}>
-            today widget zone
+      {!isMobile && (
+        <div className={HomeStyles.firstZone}>
+          <div className={HomeStyles.topLeft}>
+            <GiantCard />
           </div>
-          <div className={HomeStyles.weekWidget}>
-            week widget zone
+          <div className={HomeStyles.downLeft}>
+            <div className={HomeStyles.todayWidget}>today widget zone</div>
+            <div className={HomeStyles.weekWidget}>week widget zone</div>
           </div>
         </div>
-      </div>}
+      )}
       <div className={HomeStyles.secondZone}>
         <div className={HomeStyles.div1}>
           <h1 className={HomeStyles.h1}>Good morning!</h1>
@@ -56,15 +53,12 @@ export default function Home() {
               );
             })}
         </div>
-        {!isMobile &&
-        <div className={HomeStyles.downRightContainer}>
-          <div className={HomeStyles.downRightSearch}>
-            search zone
+        {!isMobile && (
+          <div className={HomeStyles.downRightContainer}>
+            <div className={HomeStyles.downRightSearch}>search zone</div>
+            <div className={HomeStyles.downRightLocation}>location zone</div>
           </div>
-          <div className={HomeStyles.downRightLocation}>
-            location zone
-          </div>
-        </div>}
+        )}
       </div>
     </div>
   );

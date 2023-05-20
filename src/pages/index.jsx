@@ -12,9 +12,18 @@ export async function getServerSideProps() {
 
   const OW_apiKey = process.env.OPENWEATHER_API_KEY;
   const WB_apiKey = process.env.WEATHERBIT_API_KEY;
-  const currentWeatherFallback = process.env.CURRENT_FALLBACK_ENDPOINT;
-  const weeklyForecastFallback = process.env.WEEKLY_FALLBACK_ENDPOINT;
-  const hourlyForecastFallback = process.env.HOURLY_FALLBACK_ENDPOINT;
+
+  const originalEdgeEndpoint = process.env.EDGE_CONFIG;
+  // Find the index of the "?" in the URI
+  const index = originalEdgeEndpoint.indexOf("?");
+
+  // Divide the URI into two parts
+  const firstPart = originalEdgeEndpoint.slice(0, index);
+  const secondPart = originalEdgeEndpoint.slice(index);
+
+  const currentWeatherFallback = `${firstPart}/item/currentWeatherData${secondPart}`;
+  const weeklyForecastFallback = `${firstPart}/item/weeklyForecast${secondPart}`;
+  const hourlyForecastFallback = `${firstPart}/item/hourlyForecast${secondPart}`;
 
   if (!OW_apiKey) {
     throw new Error("Missing API key");

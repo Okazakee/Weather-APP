@@ -17,7 +17,7 @@ export default function DailyCard({ data }) {
         src={`/weatherIcons/${weatherType}.png`}
         width={80}
         height={80}
-        alt="weatherType"
+        alt={weatherType}
         quality={60}
       />
     </div>

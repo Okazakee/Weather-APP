@@ -11,10 +11,11 @@ export async function getServerSideProps() {
   // Hardcoded 3 main cities to check
   const cities = ["London", "Turin", "Rome"];
 
+  const originalEdgeEndpoint = process.env.EDGE_CONFIG;
   const OW_apiKey = process.env.OPENWEATHER_API_KEY;
   const WB_apiKey = process.env.WEATHERBIT_API_KEY;
+  const U_apiKey = process.env.UNSPLASH_ACCESS_KEY
 
-  const originalEdgeEndpoint = process.env.EDGE_CONFIG;
   // Find the index of the "?" in the URI
   const index = originalEdgeEndpoint.indexOf("?");
 
@@ -34,23 +35,31 @@ export async function getServerSideProps() {
     // Fetch current weather data for each city in cities array
     const fetchCurrentWeatherData = await Promise.all(
       cities.map(async (cityName) => {
-        const response = await axios.get(
+        const weatherResponse = await axios.get(
           `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${OW_apiKey}&units=metric`
         );
-        return response.data;
+
+        const unsplashResponse = await axios.get(
+          `https://api.unsplash.com/photos/random/?query=${cityName}&client_id=${U_apiKey}&orientation=landscape`
+        );
+
+        const imageUrl = unsplashResponse.data.urls.regular;
+
+        const weatherData = {
+          ...weatherResponse.data,
+          imageUrl
+        };
+
+        return { [cityName]: weatherData };
       })
     );
 
-    // Reconstruct fetched data adding name property to each object
     let currentWeatherData;
     try {
-      currentWeatherData = fetchCurrentWeatherData.reduce(
-        (acc, data, index) => {
-          const cityName = cities[index];
-          return { ...acc, [cityName]: data };
-        },
-        {}
-      );
+      currentWeatherData = fetchCurrentWeatherData.reduce((acc, data) => {
+        const cityName = Object.keys(data)[0];
+        return { ...acc, ...data, [cityName]: { ...data[cityName], imageUrl: data[cityName].imageUrl } };
+      }, {});
     } catch (error) {
       console.error("Error reconstructing current weather data:", error);
       // Use the fallback URI here

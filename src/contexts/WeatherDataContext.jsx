@@ -16,14 +16,15 @@ const WeatherDataProvider = ({ children }) => {
   // pages and component data handler
   useEffect(() => {
     if (selectedCity !== null) {
+
+      const dailyCardData = weeklyForecast[selectedCity];
+      const hourlyLineData = hourlyForecast[selectedCity].list;
+      const giantCardImage = currentWeather[selectedCity].img;
       const detailsPageData = {
         selectedCity: selectedCity,
         weatherType: currentWeather[selectedCity].weather[0].main,
         temperature: Math.floor(currentWeather[selectedCity].main.temp),
       };
-
-      const dailyCardData = weeklyForecast[selectedCity];
-      const hourlyLineData = hourlyForecast[selectedCity].list;
 
       SetDetailsPageData(detailsPageData);
       SetDailyCardData(dailyCardData);

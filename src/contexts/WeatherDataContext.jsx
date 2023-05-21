@@ -16,12 +16,17 @@ const WeatherDataProvider = ({ children }) => {
   // pages and component data handler
   useEffect(() => {
     if (selectedCity !== null) {
+
       const dailyCardData = weeklyForecast[selectedCity];
 
-      const hourlyLineData = hourlyForecast[selectedCity].hourly.time.slice(0, 12).map((time, index) => ({
-        time,
-        temp: hourlyForecast[selectedCity].hourly.temperature_2m[index],
-      }));
+      const currentHourIndex = new Date().getHours();
+
+      const hourlyLineData = hourlyForecast[selectedCity].hourly.time
+        .slice(currentHourIndex, currentHourIndex + 12) // Use currentHourIndex as the starting point
+        .map((time, index) => ({
+          time,
+          temp: hourlyForecast[selectedCity].hourly.temperature_2m[currentHourIndex + index],
+        }));
 
       const detailsPageData = {
         selectedCity: selectedCity,

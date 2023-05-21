@@ -6,7 +6,9 @@ import { StylesContext } from "@/contexts/StylesContext";
 export default function DailyCard({ data }) {
   const { DailyCardStyles } = useContext(StylesContext);
 
-  const { weatherType, temp, day } = data;
+  const { weatherType, temp, day, fallbackImage } = data;
+
+  const img = `/weatherIcons/${weatherType}.png`;
 
   return (
     <div className={DailyCardStyles.container}>
@@ -14,7 +16,7 @@ export default function DailyCard({ data }) {
       <p className={DailyCardStyles.tempText}>{temp + "°"}</p>
       <Image
         className="pb-3 mx-auto drop-shadow-sm"
-        src={`/weatherIcons/${weatherType}.png`}
+        src={fallbackImage}
         width={80}
         height={80}
         alt={weatherType}

@@ -13,22 +13,11 @@ export async function getServerSideProps() {
   // Hardcoded 3 main cities to check
   const cities = ["London", "Turin", "Rome"];
 
-  const originalEdgeEndpoint = process.env.EDGE_CONFIG;
   const openWeatherApiKey = process.env.OPENWEATHER_API_KEY;
-  const weatherBitApiKey = process.env.WEATHERBIT_API_KEY;
+  const weatherApiApiKey = process.env.WEATHERAPI_API_KEY;
   const pexelsApiKey = process.env.PEXELS_API_KEY;
 
-  // Find the index of the "?" in the URI
-  const index = originalEdgeEndpoint.indexOf("?");
-
-  // Divide the URI into two partscityName
-  const firstPart = originalEdgeEndpoint.slice(0, index);
-  const secondPart = originalEdgeEndpoint.slice(index);
-
-  const currentWeatherFallback = `${firstPart}/item/currentWeatherData${secondPart}`;
-  const weeklyForecastFallback = `${firstPart}/item/weeklyForecast${secondPart}`;
-
-  if (!openWeatherApiKey || !weatherBitApiKey || !pexelsApiKey) {
+  if (!openWeatherApiKey || !weatherApiApiKey || !pexelsApiKey) {
     throw new Error("Missing API key");
   }
 
@@ -48,9 +37,6 @@ export async function getServerSideProps() {
       }, {});
     } catch (error) {
       console.error("Error reconstructing current weather data");
-      // Use the fallback URI here
-      const fallbackResponse = await axios.get(currentWeatherFallback);
-      currentWeatherData = fallbackResponse.data;
     }
 
     // Fetch hourly forecast data for each city in cities array
@@ -68,12 +54,12 @@ export async function getServerSideProps() {
     }
 
     // Fetch weekly forecast data for each city in cities array
-    const fetchWeeklyForecast = await fetchWeeklyForecastData(cities, weatherBitApiKey, weeklyForecastFallback);
+    const fetchWeeklyForecast = await fetchWeeklyForecastData(cities, weatherApiApiKey);
 
     const weeklyForecastData = fetchWeeklyForecast.reduce(
       (acc, data, index) => {
         const cityName = cities[index];
-        return { ...acc, [cityName]: data.data };
+        return { ...acc, [cityName]: data };
       },
       {}
     );

@@ -17,7 +17,7 @@ const WeatherDataProvider = ({ children }) => {
   useEffect(() => {
     if (selectedCity !== null) {
 
-      const dailyCardData = weeklyForecast[selectedCity];
+      const dailyCardData = weeklyForecast[selectedCity].slice(1);
 
       const currentHourIndex = new Date().getHours();
 

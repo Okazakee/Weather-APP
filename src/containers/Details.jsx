@@ -81,9 +81,10 @@ export default function Details() {
               <DailyCard
                 key={i}
                 data={{
-                  weatherType: dayForecastData.weather.description,
-                  temp: Math.floor(dayForecastData.temp),
-                  day: moment(dayForecastData.datetime).format("dddd"),
+                  weatherType: dayForecastData.day.condition.text,
+                  temp: Math.floor(dayForecastData.day.avgtemp_c),
+                  day: moment(dayForecastData.date).format("dddd"),
+                  fallbackImage: 'https:' + dayForecastData.day.condition.icon
                 }}
               />
             );

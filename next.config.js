@@ -16,6 +16,10 @@ const nextConfig = {};
         protocol: "https",
         hostname: "startpage.com",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.weatherapi.com",
+      },
     ],
   },
 }),

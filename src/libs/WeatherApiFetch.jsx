@@ -59,22 +59,20 @@ export const fetchHourlyForecastData = async (cities) => {
     return fetchHourlyForecastData;
   };
 
-export const fetchWeeklyForecastData = async (cities, weatherBitApiKey, weeklyForecastFallback) => {
+export const fetchWeeklyForecastData = async (cities, weatherApiApiKey) => {
 
     const fetchWeeklyForecast = await Promise.all(
         cities.map(async (cityName) => {
         try {
             const response = await axios.get(
-            `https://api.weatherbit.io/v2.0/forecast/daily?city=${cityName}&key=${weatherBitApiKey}&units=M`
+            `https://api.weatherapi.com/v1/forecast.json?key=${weatherApiApiKey}&q=${cityName}&days=7`
             );
-            return response.data;
+            return response.data.forecast.forecastday;
         } catch (error) {
             console.error("Error fetching weekly forecast data:");
-            // Use the fallback URI here
-            const fallbackResponse = await axios.get(weeklyForecastFallback);
-            return fallbackResponse.data;
         }
         })
     );
+
     return fetchWeeklyForecast;
 }

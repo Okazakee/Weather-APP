@@ -17,7 +17,12 @@ const WeatherDataProvider = ({ children }) => {
   useEffect(() => {
     if (selectedCity !== null) {
       const dailyCardData = weeklyForecast[selectedCity];
-      const hourlyLineData = hourlyForecast[selectedCity].list;
+
+      const hourlyLineData = hourlyForecast[selectedCity].hourly.time.slice(0, 12).map((time, index) => ({
+        time,
+        temp: hourlyForecast[selectedCity].hourly.temperature_2m[index],
+      }));
+
       const detailsPageData = {
         selectedCity: selectedCity,
         weatherType: currentWeather[selectedCity].weather[0].main,

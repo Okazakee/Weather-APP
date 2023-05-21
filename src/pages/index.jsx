@@ -26,7 +26,6 @@ export async function getServerSideProps() {
 
   const currentWeatherFallback = `${firstPart}/item/currentWeatherData${secondPart}`;
   const weeklyForecastFallback = `${firstPart}/item/weeklyForecast${secondPart}`;
-  const hourlyForecastFallback = `${firstPart}/item/hourlyForecast${secondPart}`;
 
   if (!openWeatherApiKey || !weatherBitApiKey || !pexelsApiKey) {
     throw new Error("Missing API key");
@@ -87,8 +86,14 @@ export async function getServerSideProps() {
     // Fetch hourly forecast data for each city in cities array
     const fetchHourlyForecast = await Promise.all(
       cities.map(async (cityName) => {
+        const geoCoding = await axios.get(`https://geocoding-api.open-meteo.com/v1/search?name=${cityName}&count=1&language=en&format=json`);
+
+        const latitude = geoCoding.data.results[0].latitude;
+
+        const longitude = geoCoding.data.results[0].longitude;
+
         const response = await axios.get(
-          `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${openWeatherApiKey}&units=metric&cnt=12`
+          `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m&forecast_days=1`
         );
         return response.data;
       })
@@ -142,7 +147,7 @@ export async function getServerSideProps() {
       },
     };
   } catch (error) {
-    console.error("Error fetching data:", error);
+    console.error("Error fetching data");
   }
 }
 

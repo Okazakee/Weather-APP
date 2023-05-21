@@ -22,14 +22,14 @@ export default function HourlyTempLine({ currentTemp }) {
                   <p className={HourlyLineStyles.p}>Now</p>
                 ) : (
                   <p className={HourlyLineStyles.p}>
-                    {moment(hourInfo.dt_txt).format("hh:mm A")}
+                    {moment(hourInfo.time).format("hh:mm A")}
                   </p>
                 )}
                 <FontAwesomeIcon className={"mx-auto"} icon={faCircle} />
                 {i === 0 ? (
                   <p>{`${currentTemp}°`}</p>
                 ) : (
-                  <p>{`${Math.floor(hourInfo.main.temp)}°`}</p>
+                  <p>{`${Math.floor(hourInfo.temp)}°`}</p>
                 )}
               </div>
             </div>

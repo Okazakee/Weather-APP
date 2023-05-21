@@ -16,7 +16,6 @@ const WeatherDataProvider = ({ children }) => {
   // pages and component data handler
   useEffect(() => {
     if (selectedCity !== null) {
-
       const dailyCardData = weeklyForecast[selectedCity].slice(1);
 
       const currentHourIndex = new Date().getHours();
@@ -25,7 +24,9 @@ const WeatherDataProvider = ({ children }) => {
         .slice(currentHourIndex, currentHourIndex + 12) // Use currentHourIndex as the starting point
         .map((time, index) => ({
           time,
-          temp: hourlyForecast[selectedCity].hourly.temperature_2m[currentHourIndex + index],
+          temp: hourlyForecast[selectedCity].hourly.temperature_2m[
+            currentHourIndex + index
+          ],
         }));
 
       const detailsPageData = {

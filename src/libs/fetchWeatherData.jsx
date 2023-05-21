@@ -1,8 +1,11 @@
-import axios from 'axios';
+import axios from "axios";
 import { createClient } from "pexels";
 
-export const fetchWeatherData = async (cities, openWeatherApiKey, pexelsApiKey) => {
-
+export const fetchWeatherData = async (
+  cities,
+  openWeatherApiKey,
+  pexelsApiKey
+) => {
   const pexelsClient = createClient(pexelsApiKey);
 
   const fetchCurrentWeatherData = await Promise.all(

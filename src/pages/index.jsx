@@ -1,5 +1,4 @@
 import { useContext, useEffect } from "react";
-import axios from "axios";
 
 import Home from "@/containers/Home";
 import Details from "@/containers/Details";
@@ -7,7 +6,11 @@ import Details from "@/containers/Details";
 import { WeatherDataContext } from "@/contexts/WeatherDataContext";
 import { StylesContext } from "@/contexts/StylesContext";
 
-import { fetchCurrentWeatherData, fetchHourlyForecastData, fetchWeeklyForecastData } from '@/libs/WeatherApiFetch'
+import {
+  fetchCurrentWeatherData,
+  fetchHourlyForecastData,
+  fetchWeeklyForecastData,
+} from "@/libs/WeatherApiFetch";
 
 export async function getServerSideProps() {
   // Hardcoded 3 main cities to check
@@ -23,7 +26,11 @@ export async function getServerSideProps() {
 
   try {
     // Fetch current weather data for each city in cities array
-    const fetchCurrentWeather = await fetchCurrentWeatherData(cities, openWeatherApiKey, pexelsApiKey);
+    const fetchCurrentWeather = await fetchCurrentWeatherData(
+      cities,
+      openWeatherApiKey,
+      pexelsApiKey
+    );
 
     let currentWeatherData;
     try {
@@ -54,7 +61,10 @@ export async function getServerSideProps() {
     }
 
     // Fetch weekly forecast data for each city in cities array
-    const fetchWeeklyForecast = await fetchWeeklyForecastData(cities, weatherApiApiKey);
+    const fetchWeeklyForecast = await fetchWeeklyForecastData(
+      cities,
+      weatherApiApiKey
+    );
 
     const weeklyForecastData = fetchWeeklyForecast.reduce(
       (acc, data, index) => {

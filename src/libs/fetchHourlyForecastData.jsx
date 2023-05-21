@@ -1,10 +1,11 @@
-import axios from 'axios';
+import axios from "axios";
 
 export const fetchHourlyForecastData = async (cities) => {
-
   const fetchHourlyForecastData = await Promise.all(
     cities.map(async (cityName) => {
-      const geoCoding = await axios.get(`https://geocoding-api.open-meteo.com/v1/search?name=${cityName}&count=1&language=en&format=json`);
+      const geoCoding = await axios.get(
+        `https://geocoding-api.open-meteo.com/v1/search?name=${cityName}&count=1&language=en&format=json`
+      );
 
       const latitude = geoCoding.data.results[0].latitude;
 

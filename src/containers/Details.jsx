@@ -84,7 +84,7 @@ export default function Details() {
                   weatherType: dayForecastData.day.condition.text,
                   temp: Math.floor(dayForecastData.day.avgtemp_c),
                   day: moment(dayForecastData.date).format("dddd"),
-                  fallbackImage: 'https:' + dayForecastData.day.condition.icon
+                  fallbackImage: "https:" + dayForecastData.day.condition.icon,
                 }}
               />
             );

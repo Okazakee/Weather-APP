@@ -1,5 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 
+import HourlyTempLine from "@/components/HourlyTempLine";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePlus } from "@fortawesome/free-solid-svg-icons";
 
@@ -12,7 +14,7 @@ import NavCard from "@/components/NavCard";
 
 export default function Home() {
   // Import Home styles from context
-  const { HomeStyles, isMobile } = useContext(StylesContext);
+  const { HomeStyles, isMobile, weatherStyle } = useContext(StylesContext);
 
   const { SetSelectedCity, selectedCity, currentWeather, avaliableCities } =
     useContext(WeatherDataContext);
@@ -24,9 +26,17 @@ export default function Home() {
           <div className={HomeStyles.topLeft}>
             <GiantCard />
           </div>
-          <div className={HomeStyles.downLeft}>
-            <div className={HomeStyles.todayWidget}>today widget zone</div>
-            <div className={HomeStyles.weekWidget}>week widget zone</div>
+          <div className={HomeStyles.widgetWrapper}>
+            <div className={HomeStyles.widgetZoneLeft}>
+              <p className={HomeStyles.labelLeft}>Today</p>
+              <div className={`${HomeStyles.hourlyLineDesktop} ${selectedCity && weatherStyle[currentWeather[selectedCity].weather[0].main]}`}>
+                <p className={HomeStyles.nowLabel}>Now</p>
+                {selectedCity && <HourlyTempLine currentTemp={Math.floor(currentWeather[selectedCity].main.temp)} />}
+              </div>
+            </div>
+            <div className={HomeStyles.widgetZoneLeft}>
+              <p className={HomeStyles.labelLeft}>This week / This month</p>
+            </div>
           </div>
         </div>
       )}
@@ -60,13 +70,13 @@ export default function Home() {
             })}
         </div>
         {!isMobile && (
-          <div className={HomeStyles.downRightContainer}>
-            <div className={HomeStyles.NavCard}>
-              <p className={HomeStyles.label}>Search</p>
+          <div className={""}>
+            <div className={HomeStyles.widgetZoneRight}>
+              <p className={HomeStyles.labelRight}>Search</p>
               <NavCard isSearch={true} />
             </div>
-            <div className={HomeStyles.NavCard}>
-              <p className={HomeStyles.label}>Localization</p>
+            <div className={HomeStyles.widgetZoneRight}>
+              <p className={HomeStyles.labelRight}>Localization</p>
               <NavCard isSearch={false} />
             </div>
           </div>

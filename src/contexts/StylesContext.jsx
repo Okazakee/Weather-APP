@@ -18,7 +18,7 @@ const StylesProvider = ({ children }) => {
   // TAILWIND STYLES
   const layout = {
     root: `bg-[#f1f1f1] min-h-screen mx-auto font-sans hideTouchInputChrome ${
-      isMobile ? "" : "pb-10 px-20"
+      isMobile ? "" : "pb-10 px-36"
     }`,
     navbar: "sm:hidden",
   };
@@ -49,13 +49,15 @@ const StylesProvider = ({ children }) => {
   const HomeStyles = {
     homeWrapper: `${isMobile ? "" : "flex max-w-6xl mx-auto pt-10"}`,
     firstZone: `basis-2/3`,
-    topLeft: "h-[25rem] mb-5 drop-shadow-xl",
-    downLeft: "flex h-[50%] border border-blue-500",
-    todayWidget: "basis-1/2 border border-yellow-500",
-    weekWidget: "basis-1/2 border border-brown-500",
-    downRightContainer: "",
-    NavCard: "mt-8",
-    label: "ml-10 text-[#01175f] font-semibold text-2xl",
+    topLeft: "h-[22rem] mb-5 drop-shadow-xl",
+    downLeft: "flex h-[50%]",
+    widgetWrapper: "flex flex-wrap",
+    widgetZoneLeft: "mt-8 basis-1/3",
+    hourlyLineDesktop: "rounded-3xl text-white py-5 h-[19rem] overflow-auto hideScrollbar text-center",
+    widgetZoneRight: "mt-8 basis-2/3",
+    labelLeft: "ml-4 mb-5 text-[#01175f] font-semibold text-2xl",
+    labelRight: "ml-16 text-[#01175f] font-semibold text-2xl",
+    nowLabel: "font-bold",
     secondZone: `ml-auto basis-1/3`,
     div1: `${isMobile ? "text-center pt-10 text-[#01175f]" : "hidden"}`,
     cardWrapper: ` ${isMobile ? "pb-28" : "mx-5"}`,
@@ -104,11 +106,25 @@ const StylesProvider = ({ children }) => {
   };
 
   const HourlyLineStyles = {
-    wrapper: "pl-8 flex items-center overflow-x-auto hideScrollbar",
-    container: "mr-2",
-    innerBox: (i) => `text-center ${i === 0 ? "font-bold text-lg" : "text-sm"}`,
-    p: "w-16 text-[0.8rem]",
+    wrapper: `hideScrollbar ${isMobile ? "pl-8 flex items-center overflow-x-auto" : "overflow-auto flex flex-col items-center"}`,
+    container: `${isMobile ? "mr-2" : "mb-8"}`,
+    dot: (i) => `mx-5 ${i === 0 ? "text-2xl" : ""}`,
+    innerBox: (i) => `${
+      isMobile ? (i === 0 ? "text-center font-bold text-lg" : "text-center text-sm")
+      : (i === 0 ? "flex items-center font-bold text-3xl" : "flex items-center")
+    }`,
+    p: `${isMobile ? "w-16 text-[0.8rem]" : ""}`,
+    tempText: "text-2xl",
   };
+
+  /* const HourlyLineStyles = {
+    wrapper: `hideScrollbar overflow-auto flex flex-col items-center`,
+    container: `mb-8`,
+    dot: (i) => `${i === 0 ? "mx-5 text-2xl" : "mx-5"}`,
+    innerBox: (i) => `flex items-center ${i === 0 ? "font-bold text-3xl" : ""}`,
+    p: `${isMobile ? "w-16 text-[0.8rem]" : ""}`,
+    tempText: "text-2xl",
+  }; */
 
   const GiantCardStyles = {
     container: "rounded-3xl overflow-hidden h-[100%] text-white",

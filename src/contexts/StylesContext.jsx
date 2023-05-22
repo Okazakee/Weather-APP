@@ -113,9 +113,9 @@ const StylesProvider = ({ children }) => {
   const GiantCardStyles = {
     container: "rounded-3xl overflow-hidden h-[100%] text-white",
     imageContainer: "",
-    miniCard: "z-20 drop-shadow-3xl -left-12 rounded-r-3xl absolute px-6 my-20 inset-y-0 left-0 flex flex-col items-center justify-center",
+    miniCard: "z-10 drop-shadow-3xl -left-12 rounded-r-3xl absolute px-6 my-20 inset-y-0 flex flex-col items-center justify-center",
     temp: "font-bold text-4xl mb-8",
-    cityInfo: "z-30 relative text-[#01175f]",
+    cityInfo: "z-10 relative text-[#01175f]",
     innerDiv: "absolute left-28 top-14 text-lg",
     cityText: "font-bold text-4xl",
     dateText: "font-semibold text-xl",

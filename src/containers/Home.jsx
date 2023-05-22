@@ -65,23 +65,29 @@ export default function Home() {
               </div>
             </div>
             <div className={HomeStyles.widget2}>
-              <div className={`${HomeStyles.widgetNav} ${
+              <div
+                className={`${HomeStyles.widgetNav} ${
                   selectedCity &&
                   weatherStyle[currentWeather[selectedCity].weather[0].main]
-                }`}>
+                }`}
+              >
                 {widgetButtons.map((button, i) => {
                   return (
                     <div
-                    key={i}
-                    className={`${HomeStyles.labelButtons(i)}`}
-                    onClick={() => updateSelectedWidget(i)}
+                      key={i}
+                      className={`${HomeStyles.labelButtons(i)}`}
+                      onClick={() => updateSelectedWidget(i)}
                     >
                       {button}
                     </div>
                   );
                 })}
               </div>
-              {selectedPeriod[0] ? <DesktopWeeklyCard accentColor={accentColor} /> : <WindCard accentColor={accentColor} />}
+              {selectedPeriod[0] ? (
+                <DesktopWeeklyCard accentColor={accentColor} />
+              ) : (
+                <WindCard accentColor={accentColor} />
+              )}
             </div>
           </div>
         </div>

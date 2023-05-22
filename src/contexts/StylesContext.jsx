@@ -121,14 +121,19 @@ const StylesProvider = ({ children }) => {
   };
 
   const DailyCardStyles = {
-    container:`glassCard text-center font-bold maw-w-fit ${isMobile ? "p-2 drop-shadow-xl mx-1.5 px-2 mb-24" : "drop-shadow-lg min-w-[7rem] mx-2.5 mb-10"}`,
+    container: `glassCard text-center font-bold maw-w-fit ${
+      isMobile
+        ? "p-2 drop-shadow-xl mx-1.5 px-2 mb-24"
+        : "drop-shadow-lg min-w-[7rem] mx-2.5 mb-10"
+    }`,
     dayText: `pt-3 mx-auto ${isMobile ? "text-xl" : "text-lg"}`,
     tempText: `text-3xl ${isMobile ? "py-2" : "py-5"}`,
-    image: `mx-auto drop-shadow-sm ${isMobile ? "pb-3" : "pb-8"}`
+    image: `mx-auto drop-shadow-sm ${isMobile ? "pb-3" : "pb-8"}`,
   };
 
   const DesktopWeeklyCardStyles = {
-    container: "w-[28.2rem] px-3 overflow-x-scroll flex text-white pt-5 rounded-b-[1.3rem] rounded-r-[1.3rem]"
+    container:
+      "w-[28.2rem] px-3 overflow-x-scroll flex text-white pt-5 rounded-b-[1.3rem] rounded-r-[1.3rem]",
   };
 
   const HourlyLineStyles = {

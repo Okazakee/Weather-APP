@@ -6,13 +6,12 @@ import { WeatherDataContext } from "@/contexts/WeatherDataContext";
 
 import DailyCard from "./DailyCard";
 
-export default function DesktopWeeklyCard({accentColor}) {
-
-  const {DesktopWeeklyCardStyles} = useContext(StylesContext);
+export default function DesktopWeeklyCard({ accentColor }) {
+  const { DesktopWeeklyCardStyles } = useContext(StylesContext);
   const { SetSelectedCity, selectedCity, detailsPageData, dailyCardData } =
     useContext(WeatherDataContext);
 
-    return (
+  return (
     <div className={`${DesktopWeeklyCardStyles.container} ${accentColor}`}>
       {dailyCardData &&
         dailyCardData.map((dayForecastData, i) => {

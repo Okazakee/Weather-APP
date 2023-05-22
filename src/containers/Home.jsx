@@ -6,8 +6,9 @@ import { faSquarePlus } from "@fortawesome/free-solid-svg-icons";
 import { WeatherDataContext } from "@/contexts/WeatherDataContext";
 import { StylesContext } from "@/contexts/StylesContext";
 
-import CardMobile from "@/components/CardMobile";
+import WeatherCard from "@/components/WeatherCard";
 import GiantCard from "@/components/GiantCard";
+import NavCard from "@/components/NavCard";
 
 export default function Home() {
   // Import Home styles from context
@@ -44,7 +45,7 @@ export default function Home() {
             avaliableCities.map((city, i) => {
               return (
                 <div key={i} onClick={() => SetSelectedCity(city)}>
-                  <CardMobile
+                  <WeatherCard
                     key={i}
                     cityName={city}
                     currentWeather={currentWeather[city]}
@@ -55,8 +56,14 @@ export default function Home() {
         </div>
         {!isMobile && (
           <div className={HomeStyles.downRightContainer}>
-            <div className={HomeStyles.downRightSearch}>search zone</div>
-            <div className={HomeStyles.downRightLocation}>location zone</div>
+            <div className={HomeStyles.NavCard}>
+              <p className={HomeStyles.label}>Search</p>
+              <NavCard isSearch={true} />
+            </div>
+            <div className={HomeStyles.NavCard}>
+              <p className={HomeStyles.label}>Localization</p>
+              <NavCard isSearch={false} />
+            </div>
           </div>
         )}
       </div>

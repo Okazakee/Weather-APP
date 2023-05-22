@@ -4,9 +4,9 @@ import Image from "next/image";
 import { StylesContext } from "@/contexts/StylesContext";
 import { SystemContext } from "@/contexts/SystemContext";
 
-export default function CardMobile({ cityName, currentWeather }) {
+export default function WeatherCard({ cityName, currentWeather }) {
   // Import Card styles and SystemDate from context
-  const { CardMobileStyles, weatherStyle } = useContext(StylesContext);
+  const { WeatherCardStyles, weatherStyle } = useContext(StylesContext);
   const { formatDate, formatMonth, formatTime } = useContext(SystemContext);
 
   const { weather, main } = currentWeather;
@@ -18,20 +18,20 @@ export default function CardMobile({ cityName, currentWeather }) {
 
   return (
     <div
-      className={`${CardMobileStyles.cardContainer} ${
+      className={`${WeatherCardStyles.cardContainer} ${
         weatherStyle[currentWeather.weatherType]
       }`}
     >
-      <div className={CardMobileStyles.cardWrapper}>
-        <div className={CardMobileStyles.cardElement}>
-          <div className={CardMobileStyles.leftInfoWrapper}>
-            <div className={CardMobileStyles.cityName}>{cityName}</div>
-            <div className={CardMobileStyles.currentDate}>{formatDate}</div>
-            <div className={CardMobileStyles.currentDate}>{formatMonth}</div>
-            <div className={CardMobileStyles.currentHour}>{formatTime}</div>
+      <div className={WeatherCardStyles.cardWrapper}>
+        <div className={WeatherCardStyles.cardElement}>
+          <div className={WeatherCardStyles.leftInfoWrapper}>
+            <div className={WeatherCardStyles.cityName}>{cityName}</div>
+            <div className={WeatherCardStyles.currentDate}>{formatDate}</div>
+            <div className={WeatherCardStyles.currentDate}>{formatMonth}</div>
+            <div className={WeatherCardStyles.currentHour}>{formatTime}</div>
           </div>
         </div>
-        <div className={CardMobileStyles.cardElement2}>
+        <div className={WeatherCardStyles.cardElement2}>
           <Image
             className="w-20 h-20 drop-shadow-sm"
             src={`/weatherIcons/${currentWeather.weatherType}.png`}
@@ -41,8 +41,8 @@ export default function CardMobile({ cityName, currentWeather }) {
             quality={100}
           />
         </div>
-        <div className={CardMobileStyles.cardElement3}>
-          <h1 className={CardMobileStyles.tempText}>
+        <div className={WeatherCardStyles.cardElement3}>
+          <h1 className={WeatherCardStyles.tempText}>
             {currentWeather.temp + "°"}
           </h1>
         </div>

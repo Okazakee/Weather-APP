@@ -14,7 +14,7 @@ const nextConfig = {};
       },
       {
         protocol: "https",
-        hostname: "startpage.com",
+        hostname: "www.startpage.com",
       },
       {
         protocol: "https",

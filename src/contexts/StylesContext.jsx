@@ -18,7 +18,7 @@ const StylesProvider = ({ children }) => {
   // TAILWIND STYLES
   const layout = {
     root: `bg-[#f1f1f1] min-h-screen mx-auto font-sans hideTouchInputChrome ${
-      isMobile ? "" : "pb-10"
+      isMobile ? "" : "pb-10 px-20"
     }`,
     navbar: "sm:hidden",
   };
@@ -47,29 +47,29 @@ const StylesProvider = ({ children }) => {
   };
 
   const HomeStyles = {
-    homeWrapper: `${isMobile ? "" : "flex max-w-7xl mx-auto pt-10"}`,
+    homeWrapper: `${isMobile ? "" : "flex max-w-6xl mx-auto pt-10"}`,
     firstZone: `basis-2/3`,
-    topLeft: "h-[50%]",
+    topLeft: "h-[25rem] mb-5 drop-shadow-xl",
     downLeft: "flex h-[50%] border border-blue-500",
     todayWidget: "basis-1/2 border border-yellow-500",
     weekWidget: "basis-1/2 border border-brown-500",
-    downRightContainer: "border border-teal-500",
-    downRightSearch: " border border-green-500 py-10",
-    downRightLocation: " border border-blue-500 py-10",
+    downRightContainer: "",
+    NavCard: "mt-8",
+    label: "ml-10 text-[#01175f] font-semibold text-2xl",
     secondZone: `ml-auto basis-1/3`,
     div1: `${isMobile ? "text-center pt-10 text-[#01175f]" : "hidden"}`,
-    cardWrapper: ` ${isMobile ? "pb-28" : ""}`,
+    cardWrapper: ` ${isMobile ? "pb-28" : "mx-5"}`,
     addCityButtonDiv: `cursor-pointer flex items-center w-fit mx-auto text-[#01175f] ${
-      isMobile ? "pt-10 pb-7" : "mb-10"
+      isMobile ? "pt-10 pb-7" : "my-10"
     }`,
     h1: " text-[1.6rem] font-bold ",
     buttons: "w-6 h-6 mr-3",
     p: "text-lg font-bold",
   };
 
-  const CardMobileStyles = {
-    cardContainer: `cursor-pointer py-[1.2rem] my-[1rem] bg-gray-400 rounded-3xl text-center drop-shadow-xl mx-auto ${
-      isMobile ? "w-[90%]" : "ml-auto w-[80%]"
+  const WeatherCardStyles = {
+    cardContainer: `cursor-pointer bg-gray-400 rounded-3xl text-center drop-shadow-xl mx-auto ${
+      isMobile ? "w-[90%] py-[1.2rem] my-[1rem]" : "ml-auto w-[19rem] py-[0.7rem] my-[1.5rem]"
     }`,
     cardWrapper: "flex justify-around",
     cardElement: "flex justify-start items-center basis-1/3 text-white",
@@ -111,7 +111,22 @@ const StylesProvider = ({ children }) => {
   };
 
   const GiantCardStyles = {
-    container: "rounded-3xl overflow-hidden h-[100%]",
+    container: "rounded-3xl overflow-hidden h-[100%] text-white",
+    imageContainer: "",
+    miniCard: "z-20 drop-shadow-3xl -left-12 rounded-r-3xl absolute px-6 my-20 inset-y-0 left-0 flex flex-col items-center justify-center",
+    temp: "font-bold text-4xl mb-8",
+    cityInfo: "z-30 relative text-[#01175f]",
+    innerDiv: "absolute left-28 top-14 text-lg",
+    cityText: "font-bold text-4xl",
+    dateText: "font-semibold text-xl",
+    weatherText: ""
+  };
+
+  const NavCardStyles = {
+    container: `cursor-pointer bg-gray-400 rounded-3xl text-center drop-shadow-xl mx-auto ml-auto w-[19rem] py-[1.5rem] my-[1.5rem]`,
+    innerDiv: "text-white text-2xl overflow-hidden",
+    searchIcon: "absolute right-0 inset-y-0 flex items-center rounded-3xl",
+    searchInput: "py-3.5 mx-5 rounded-md focus:outline-none text-black font-bold",
   };
 
   return (
@@ -126,11 +141,12 @@ const StylesProvider = ({ children }) => {
         weatherStyle,
         navStyles,
         HomeStyles,
-        CardMobileStyles,
+        WeatherCardStyles,
         DetailsPageStyles,
         DailyCardStyles,
         HourlyLineStyles,
         GiantCardStyles,
+        NavCardStyles
       }}
     >
       {children}

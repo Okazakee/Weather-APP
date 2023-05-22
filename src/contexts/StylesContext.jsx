@@ -18,6 +18,14 @@ const StylesProvider = ({ children }) => {
     });
   };
 
+  // Widget selection handler
+  const updateSelectedWidget = (index) => {
+    SetSelectedPeriod((prevSelectedWidget) => {
+      const newSelectedWidgets = prevSelectedWidget.map((btn, i) => i === index);
+      return newSelectedWidgets;
+    });
+  };
+
   // TAILWIND STYLES
   const layout = {
     root: `bg-[#f1f1f1] min-h-screen mx-auto font-sans hideTouchInputChrome ${
@@ -53,16 +61,17 @@ const StylesProvider = ({ children }) => {
     homeWrapper: `${isMobile ? "" : "flex max-w-6xl mx-auto pt-10"}`,
     firstZone: `ml-10 basis-2/3`,
     topLeft: "h-[22rem] mb-4 drop-shadow-xl",
-    downLeft: "flex h-[50%]",
-    widgetWrapper: "flex flex-wrap",
-    widgetZoneLeft: "mt-8 basis-1/3",
+    widgetWrapper: "flex mt-8",
+    widget1: "basis-1/3",
+    widget2: "basis-2/3",
+    widgetNav: "bg-white w-fit rounded-t-[1.3rem] ml-10 flex items-center font-semibold text-2xl",
     hourlyLineDesktop: "rounded-[1.3rem] text-white py-5 h-[19rem] overflow-auto hideScrollbar text-center",
-    widgetZoneRight: "mt-8 basis-2/3",
+    widgetZoneRight: "mt-8 basis-1/3",
     labelLeft: "ml-4 mb-5 text-[#01175f] font-semibold text-2xl",
     labelRight: "ml-16 text-[#01175f] font-semibold text-2xl",
     labelButtons: (i) =>
-      `transition-all duration-200 transform-gpu ${
-        selectedPeriod[i] ? accentColor : "text-white"
+      `py-4 px-5 rounded-t-[1.3rem] cursor-pointer ${
+        selectedPeriod[i] ? accentColor + " text-white" : "text-[#01175f]"
       }`,
     nowLabel: "font-bold",
     secondZone: `ml-auto basis-1/3`,
@@ -156,6 +165,7 @@ const StylesProvider = ({ children }) => {
         thisMonth,
         SetThisMonth,
         updateSelectedIcon,
+        updateSelectedWidget,
         layout,
         weatherStyle,
         navStyles,

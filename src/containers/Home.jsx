@@ -11,10 +11,12 @@ import { StylesContext } from "@/contexts/StylesContext";
 import WeatherCard from "@/components/WeatherCard";
 import GiantCard from "@/components/GiantCard";
 import NavCard from "@/components/NavCard";
+import WindCard from "@/components/WindCard";
+import DesktopWeeklyCard from "@/components/DesktopWeeklyCard";
 
 export default function Home() {
   // Import Home styles from context
-  const { HomeStyles, isMobile, weatherStyle, SetSelectedPeriod, selectedPeriod, SetAccentColor, accentColor } = useContext(StylesContext);
+  const { HomeStyles, isMobile, weatherStyle, updateSelectedWidget, selectedPeriod, SetAccentColor, accentColor } = useContext(StylesContext);
 
   const { SetSelectedCity, selectedCity, currentWeather, avaliableCities } =
     useContext(WeatherDataContext);
@@ -35,24 +37,27 @@ export default function Home() {
             <GiantCard />
           </div>
           <div className={HomeStyles.widgetWrapper}>
-            <div className={HomeStyles.widgetZoneLeft}>
+            <div className={HomeStyles.widget1}>
               <p className={HomeStyles.labelLeft}>Today</p>
               <div className={`${HomeStyles.hourlyLineDesktop} ${selectedCity && weatherStyle[currentWeather[selectedCity].weather[0].main]}`}>
                 <p className={HomeStyles.nowLabel}>Now</p>
                 {selectedCity && <HourlyTempLine currentTemp={Math.floor(currentWeather[selectedCity].main.temp)} />}
               </div>
             </div>
-            <div className={HomeStyles.widgetZoneLeft}>
-              {widgetButtons.map((button, i) => {
-                return (
-                  <button
-                  key={i}
-                  className={`${HomeStyles.labelButtons(i)} ${i === selectedPeriod && accentColor}`}
-                  onClick={() => SetSelectedPeriod(i)}>
-                    {button}
-                  </button>
-                )
-              })}
+            <div className={HomeStyles.widget2}>
+              <div className={HomeStyles.widgetNav}>
+                {widgetButtons.map((button, i) => {
+                  return (
+                    <div
+                    key={i}
+                    className={`${HomeStyles.labelButtons(i)} ${i === selectedPeriod && accentColor}`}
+                    onClick={() => updateSelectedWidget(i)}>
+                      {button}
+                    </div>
+                  )
+                })}
+              </div>
+              {selectedPeriod[0] ? <DesktopWeeklyCard /> : <WindCard />}
             </div>
           </div>
         </div>

@@ -48,8 +48,8 @@ const StylesProvider = ({ children }) => {
 
   const HomeStyles = {
     homeWrapper: `${isMobile ? "" : "flex max-w-6xl mx-auto pt-10"}`,
-    firstZone: `basis-2/3`,
-    topLeft: "h-[22rem] mb-5 drop-shadow-xl",
+    firstZone: `ml-10 basis-2/3`,
+    topLeft: "h-[22rem] mb-4 drop-shadow-xl",
     downLeft: "flex h-[50%]",
     widgetWrapper: "flex flex-wrap",
     widgetZoneLeft: "mt-8 basis-1/3",
@@ -117,20 +117,11 @@ const StylesProvider = ({ children }) => {
     tempText: "text-2xl",
   };
 
-  /* const HourlyLineStyles = {
-    wrapper: `hideScrollbar overflow-auto flex flex-col items-center`,
-    container: `mb-8`,
-    dot: (i) => `${i === 0 ? "mx-5 text-2xl" : "mx-5"}`,
-    innerBox: (i) => `flex items-center ${i === 0 ? "font-bold text-3xl" : ""}`,
-    p: `${isMobile ? "w-16 text-[0.8rem]" : ""}`,
-    tempText: "text-2xl",
-  }; */
-
   const GiantCardStyles = {
     container: "rounded-3xl overflow-hidden h-[100%] text-white",
     imageContainer: "",
-    miniCard: "z-10 drop-shadow-3xl -left-12 rounded-r-3xl absolute px-6 my-20 inset-y-0 flex flex-col items-center justify-center",
-    temp: "font-bold text-4xl mb-8",
+    miniCard: "z-10 drop-shadow-3xl -left-10 rounded-r-3xl absolute px-6 my-16 inset-y-0 flex flex-col items-center justify-center",
+    temp: "font-bold text-[2.5rem] mb-8",
     cityInfo: "z-10 relative text-[#01175f]",
     innerDiv: "absolute left-28 top-14 text-lg",
     cityText: "font-bold text-4xl",

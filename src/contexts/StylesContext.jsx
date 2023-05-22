@@ -6,6 +6,7 @@ const StylesProvider = ({ children }) => {
   // State management for navbar button selection
   const [selectedIcons, SetSelectedIcons] = useState([true, false, false]);
   const [isMobile, SetIsMobile] = useState(true);
+  const [thisMonth, SetThisMonth] = useState(true);
 
   // Navbar button selection handler
   const updateSelectedIcon = (index) => {
@@ -35,7 +36,7 @@ const StylesProvider = ({ children }) => {
 
   const navStyles = {
     navbar:
-      "overflow-hidden bg-white mx-5 text-center rounded-3xl drop-shadow-xl flex justify-around fixed bottom-5 left-0 right-0 z-50",
+      "overflow-hidden bg-white mx-5 text-center rounded-[1.3rem] drop-shadow-xl flex justify-around fixed bottom-5 left-0 right-0 z-50",
     div1: (i) =>
       `cursor-pointer px-5 py-[1.1rem] transition-all duration-200 transform-gpu border-b-2 ${
         selectedIcons[i] ? "border-[#01175f]" : "border-white"
@@ -53,7 +54,7 @@ const StylesProvider = ({ children }) => {
     downLeft: "flex h-[50%]",
     widgetWrapper: "flex flex-wrap",
     widgetZoneLeft: "mt-8 basis-1/3",
-    hourlyLineDesktop: "rounded-3xl text-white py-5 h-[19rem] overflow-auto hideScrollbar text-center",
+    hourlyLineDesktop: "rounded-[1.3rem] text-white py-5 h-[19rem] overflow-auto hideScrollbar text-center",
     widgetZoneRight: "mt-8 basis-2/3",
     labelLeft: "ml-4 mb-5 text-[#01175f] font-semibold text-2xl",
     labelRight: "ml-16 text-[#01175f] font-semibold text-2xl",
@@ -70,7 +71,7 @@ const StylesProvider = ({ children }) => {
   };
 
   const WeatherCardStyles = {
-    cardContainer: `cursor-pointer bg-gray-400 rounded-3xl text-center drop-shadow-xl mx-auto ${
+    cardContainer: `cursor-pointer bg-gray-400 rounded-[1.3rem] text-center drop-shadow-xl mx-auto ${
       isMobile ? "w-[90%] py-[1.2rem] my-[1rem]" : "ml-auto w-[19rem] py-[0.7rem] my-[1.5rem]"
     }`,
     cardWrapper: "flex justify-around",
@@ -118,21 +119,20 @@ const StylesProvider = ({ children }) => {
   };
 
   const GiantCardStyles = {
-    container: "rounded-3xl overflow-hidden h-[100%] text-white",
-    imageContainer: "",
-    miniCard: "z-10 drop-shadow-3xl -left-10 rounded-r-3xl absolute px-6 my-16 inset-y-0 flex flex-col items-center justify-center",
+    container: "rounded-[1.3rem] overflow-hidden h-[100%] text-white",
+    miniCard: "z-10 drop-shadow-2xl -left-10 rounded-r-3xl absolute px-6 my-16 inset-y-0 flex flex-col items-center justify-center",
     temp: "font-bold text-[2.5rem] mb-8",
-    cityInfo: "z-10 relative text-[#01175f]",
-    innerDiv: "absolute left-28 top-14 text-lg",
-    cityText: "font-bold text-4xl",
-    dateText: "font-semibold text-xl",
+    cityInfo: "z-10 relative text-white",
+    innerDiv: "absolute left-28 top-14 text-xl text-shadow",
+    cityText: "font-bold text-2xl",
+    dateText: "font-semibold",
     weatherText: ""
   };
 
   const NavCardStyles = {
-    container: `cursor-pointer bg-gray-400 rounded-3xl text-center drop-shadow-xl mx-auto ml-auto w-[19rem] py-[1.5rem] my-[1.5rem]`,
+    container: `cursor-pointer bg-gray-400 rounded-[1.3rem] text-center drop-shadow-xl mx-auto ml-auto w-[19rem] py-[1.5rem] my-[1.5rem]`,
     innerDiv: "text-white text-2xl overflow-hidden",
-    searchIcon: "absolute right-0 inset-y-0 flex items-center rounded-3xl px-0.5",
+    searchIcon: "absolute right-0 inset-y-0 flex items-center rounded-[1.3rem] px-0.5",
     searchInput: "py-3.5 mx-5 rounded-md focus:outline-none text-black font-bold",
   };
 
@@ -143,6 +143,8 @@ const StylesProvider = ({ children }) => {
         SetSelectedIcons,
         isMobile,
         SetIsMobile,
+        thisMonth,
+        SetThisMonth,
         updateSelectedIcon,
         layout,
         weatherStyle,

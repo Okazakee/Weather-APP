@@ -31,15 +31,13 @@ export default function GiantCard() {
         </div>
       </div>
       {selectedCity && (
-        <div className={GiantCardStyles.imageContainer}>
-            <Image
-              className="object-cover object-center rounded-3xl"
-              src={selectedCity && currentWeather[selectedCity].imageUrl}
-              fill
-              alt={`${selectedCity} image from Pexels`}
-              quality={100}
-            />
-        </div>
+        <Image
+          className="object-cover object-center rounded-[1.3rem]"
+          src={selectedCity && currentWeather[selectedCity].imageUrl}
+          fill
+          alt={`${selectedCity} image from Pexels`}
+          quality={100}
+        />
       )}
     </div>
   );

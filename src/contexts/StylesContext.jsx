@@ -5,6 +5,8 @@ const StylesContext = createContext();
 const StylesProvider = ({ children }) => {
   // State management for navbar button selection
   const [selectedIcons, SetSelectedIcons] = useState([true, false, false]);
+  const [selectedPeriod, SetSelectedPeriod] = useState([true, false]);
+  const [accentColor, SetAccentColor] = useState();
   const [isMobile, SetIsMobile] = useState(true);
   const [thisMonth, SetThisMonth] = useState(true);
 
@@ -19,7 +21,7 @@ const StylesProvider = ({ children }) => {
   // TAILWIND STYLES
   const layout = {
     root: `bg-[#f1f1f1] min-h-screen mx-auto font-sans hideTouchInputChrome ${
-      isMobile ? "" : "pb-10 px-36"
+      isMobile ? "" : "pb-10 px-5"
     }`,
     navbar: "sm:hidden",
   };
@@ -58,6 +60,10 @@ const StylesProvider = ({ children }) => {
     widgetZoneRight: "mt-8 basis-2/3",
     labelLeft: "ml-4 mb-5 text-[#01175f] font-semibold text-2xl",
     labelRight: "ml-16 text-[#01175f] font-semibold text-2xl",
+    labelButtons: (i) =>
+      `transition-all duration-200 transform-gpu ${
+        selectedPeriod[i] ? accentColor : "text-white"
+      }`,
     nowLabel: "font-bold",
     secondZone: `ml-auto basis-1/3`,
     div1: `${isMobile ? "text-center pt-10 text-[#01175f]" : "hidden"}`,
@@ -108,7 +114,7 @@ const StylesProvider = ({ children }) => {
 
   const HourlyLineStyles = {
     wrapper: `hideScrollbar ${isMobile ? "pl-8 flex items-center overflow-x-auto" : "overflow-auto flex flex-col items-center"}`,
-    container: `${isMobile ? "mr-2" : "mb-8"}`,
+    container: `${isMobile ? "mr-2" : "mb-7"}`,
     dot: (i) => `mx-5 ${i === 0 ? "text-2xl" : ""}`,
     innerBox: (i) => `${
       isMobile ? (i === 0 ? "text-center font-bold text-lg" : "text-center text-sm")
@@ -123,7 +129,7 @@ const StylesProvider = ({ children }) => {
     miniCard: "z-10 drop-shadow-2xl -left-10 rounded-r-3xl absolute px-6 my-16 inset-y-0 flex flex-col items-center justify-center",
     temp: "font-bold text-[2.5rem] mb-8",
     cityInfo: "z-10 relative text-white",
-    innerDiv: "absolute left-28 top-14 text-xl text-shadow",
+    innerDiv: "absolute left-28 top-16 text-xl text-shadow",
     cityText: "font-bold text-2xl",
     dateText: "font-semibold",
     weatherText: ""
@@ -143,6 +149,10 @@ const StylesProvider = ({ children }) => {
         SetSelectedIcons,
         isMobile,
         SetIsMobile,
+        selectedPeriod,
+        accentColor,
+        SetAccentColor,
+        SetSelectedPeriod,
         thisMonth,
         SetThisMonth,
         updateSelectedIcon,

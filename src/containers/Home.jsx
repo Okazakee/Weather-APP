@@ -14,10 +14,18 @@ import NavCard from "@/components/NavCard";
 
 export default function Home() {
   // Import Home styles from context
-  const { HomeStyles, isMobile, weatherStyle } = useContext(StylesContext);
+  const { HomeStyles, isMobile, weatherStyle, SetSelectedPeriod, selectedPeriod, SetAccentColor, accentColor } = useContext(StylesContext);
 
   const { SetSelectedCity, selectedCity, currentWeather, avaliableCities } =
     useContext(WeatherDataContext);
+
+  const widgetButtons = ["This Week", "This Month"];
+
+  useEffect(() => {
+
+    selectedCity && SetAccentColor(weatherStyle[currentWeather[selectedCity].weather[0].main]);
+
+  }, [selectedCity, weatherStyle, currentWeather]);
 
   return (
     <div className={HomeStyles.homeWrapper}>
@@ -35,7 +43,16 @@ export default function Home() {
               </div>
             </div>
             <div className={HomeStyles.widgetZoneLeft}>
-              <p className={HomeStyles.labelLeft}>This week / This month</p>
+              {widgetButtons.map((button, i) => {
+                return (
+                  <button
+                  key={i}
+                  className={`${HomeStyles.labelButtons(i)} ${i === selectedPeriod && accentColor}`}
+                  onClick={() => SetSelectedPeriod(i)}>
+                    {button}
+                  </button>
+                )
+              })}
             </div>
           </div>
         </div>

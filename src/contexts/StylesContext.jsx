@@ -21,7 +21,9 @@ const StylesProvider = ({ children }) => {
   // Widget selection handler
   const updateSelectedWidget = (index) => {
     SetSelectedPeriod((prevSelectedWidget) => {
-      const newSelectedWidgets = prevSelectedWidget.map((btn, i) => i === index);
+      const newSelectedWidgets = prevSelectedWidget.map(
+        (btn, i) => i === index
+      );
       return newSelectedWidgets;
     });
   };
@@ -64,8 +66,10 @@ const StylesProvider = ({ children }) => {
     widgetWrapper: "flex mt-8",
     widget1: "basis-1/3",
     widget2: "basis-2/3",
-    widgetNav: "bg-white w-fit rounded-t-[1.3rem] ml-10 flex items-center font-semibold text-2xl",
-    hourlyLineDesktop: "rounded-[1.3rem] text-white py-5 h-[19rem] overflow-auto hideScrollbar text-center",
+    widgetNav:
+      "bg-white w-fit rounded-t-[1.3rem] ml-10 flex items-center font-semibold text-2xl",
+    hourlyLineDesktop:
+      "rounded-[1.3rem] text-white py-5 h-[19rem] overflow-auto hideScrollbar text-center",
     widgetZoneRight: "mt-8 basis-1/3",
     labelLeft: "ml-4 mb-5 text-[#01175f] font-semibold text-2xl",
     labelRight: "ml-16 text-[#01175f] font-semibold text-2xl",
@@ -87,7 +91,9 @@ const StylesProvider = ({ children }) => {
 
   const WeatherCardStyles = {
     cardContainer: `cursor-pointer bg-gray-400 rounded-[1.3rem] text-center drop-shadow-xl mx-auto ${
-      isMobile ? "w-[90%] py-[1.2rem] my-[1rem]" : "ml-auto w-[19rem] py-[0.7rem] my-[1.5rem]"
+      isMobile
+        ? "w-[90%] py-[1.2rem] my-[1rem]"
+        : "ml-auto w-[19rem] py-[0.7rem] my-[1.5rem]"
     }`,
     cardWrapper: "flex justify-around",
     cardElement: "flex justify-start items-center basis-1/3 text-white",
@@ -122,33 +128,46 @@ const StylesProvider = ({ children }) => {
   };
 
   const HourlyLineStyles = {
-    wrapper: `hideScrollbar ${isMobile ? "pl-8 flex items-center overflow-x-auto" : "overflow-auto flex flex-col items-center"}`,
+    wrapper: `hideScrollbar ${
+      isMobile
+        ? "pl-8 flex items-center overflow-x-auto"
+        : "overflow-auto flex flex-col items-center"
+    }`,
     container: `${isMobile ? "mr-2" : "mb-7"}`,
     dot: (i) => `mx-5 ${i === 0 ? "text-2xl" : ""}`,
-    innerBox: (i) => `${
-      isMobile ? (i === 0 ? "text-center font-bold text-lg" : "text-center text-sm")
-      : (i === 0 ? "flex items-center font-bold text-3xl" : "flex items-center")
-    }`,
+    innerBox: (i) =>
+      `${
+        isMobile
+          ? i === 0
+            ? "text-center font-bold text-lg"
+            : "text-center text-sm"
+          : i === 0
+          ? "flex items-center font-bold text-3xl"
+          : "flex items-center"
+      }`,
     p: `${isMobile ? "w-16 text-[0.8rem]" : ""}`,
     tempText: "text-2xl",
   };
 
   const GiantCardStyles = {
     container: "rounded-[1.3rem] overflow-hidden h-[100%] text-white",
-    miniCard: "z-10 drop-shadow-2xl -left-10 rounded-r-3xl absolute px-6 my-16 inset-y-0 flex flex-col items-center justify-center",
+    miniCard:
+      "z-10 drop-shadow-2xl -left-10 rounded-r-3xl absolute px-6 my-16 inset-y-0 flex flex-col items-center justify-center",
     temp: "font-bold text-[2.5rem] mb-8",
     cityInfo: "z-10 relative text-white",
     innerDiv: "absolute left-28 top-16 text-xl text-shadow",
     cityText: "font-bold text-2xl",
     dateText: "font-semibold",
-    weatherText: ""
+    weatherText: "",
   };
 
   const NavCardStyles = {
     container: `cursor-pointer bg-gray-400 rounded-[1.3rem] text-center drop-shadow-xl mx-auto ml-auto w-[19rem] py-[1.5rem] my-[1.5rem]`,
     innerDiv: "text-white text-2xl overflow-hidden",
-    searchIcon: "absolute right-0 inset-y-0 flex items-center rounded-[1.3rem] px-0.5",
-    searchInput: "py-3.5 mx-5 rounded-md focus:outline-none text-black font-bold",
+    searchIcon:
+      "absolute right-0 inset-y-0 flex items-center rounded-[1.3rem] px-0.5",
+    searchInput:
+      "py-3.5 mx-5 rounded-md focus:outline-none text-black font-bold",
   };
 
   return (
@@ -175,7 +194,7 @@ const StylesProvider = ({ children }) => {
         DailyCardStyles,
         HourlyLineStyles,
         GiantCardStyles,
-        NavCardStyles
+        NavCardStyles,
       }}
     >
       {children}

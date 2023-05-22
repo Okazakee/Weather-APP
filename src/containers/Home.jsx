@@ -16,7 +16,15 @@ import DesktopWeeklyCard from "@/components/DesktopWeeklyCard";
 
 export default function Home() {
   // Import Home styles from context
-  const { HomeStyles, isMobile, weatherStyle, updateSelectedWidget, selectedPeriod, SetAccentColor, accentColor } = useContext(StylesContext);
+  const {
+    HomeStyles,
+    isMobile,
+    weatherStyle,
+    updateSelectedWidget,
+    selectedPeriod,
+    SetAccentColor,
+    accentColor,
+  } = useContext(StylesContext);
 
   const { SetSelectedCity, selectedCity, currentWeather, avaliableCities } =
     useContext(WeatherDataContext);
@@ -24,10 +32,11 @@ export default function Home() {
   const widgetButtons = ["This Week", "This Month"];
 
   useEffect(() => {
-
-    selectedCity && SetAccentColor(weatherStyle[currentWeather[selectedCity].weather[0].main]);
-
-  }, [selectedCity, weatherStyle, currentWeather]);
+    selectedCity &&
+      SetAccentColor(
+        weatherStyle[currentWeather[selectedCity].weather[0].main]
+      );
+  }, [SetAccentColor, selectedCity, weatherStyle, currentWeather]);
 
   return (
     <div className={HomeStyles.homeWrapper}>
@@ -39,9 +48,20 @@ export default function Home() {
           <div className={HomeStyles.widgetWrapper}>
             <div className={HomeStyles.widget1}>
               <p className={HomeStyles.labelLeft}>Today</p>
-              <div className={`${HomeStyles.hourlyLineDesktop} ${selectedCity && weatherStyle[currentWeather[selectedCity].weather[0].main]}`}>
+              <div
+                className={`${HomeStyles.hourlyLineDesktop} ${
+                  selectedCity &&
+                  weatherStyle[currentWeather[selectedCity].weather[0].main]
+                }`}
+              >
                 <p className={HomeStyles.nowLabel}>Now</p>
-                {selectedCity && <HourlyTempLine currentTemp={Math.floor(currentWeather[selectedCity].main.temp)} />}
+                {selectedCity && (
+                  <HourlyTempLine
+                    currentTemp={Math.floor(
+                      currentWeather[selectedCity].main.temp
+                    )}
+                  />
+                )}
               </div>
             </div>
             <div className={HomeStyles.widget2}>
@@ -49,12 +69,15 @@ export default function Home() {
                 {widgetButtons.map((button, i) => {
                   return (
                     <div
-                    key={i}
-                    className={`${HomeStyles.labelButtons(i)} ${i === selectedPeriod && accentColor}`}
-                    onClick={() => updateSelectedWidget(i)}>
+                      key={i}
+                      className={`${HomeStyles.labelButtons(i)} ${
+                        i === selectedPeriod && accentColor
+                      }`}
+                      onClick={() => updateSelectedWidget(i)}
+                    >
                       {button}
                     </div>
-                  )
+                  );
                 })}
               </div>
               {selectedPeriod[0] ? <DesktopWeeklyCard /> : <WindCard />}
@@ -75,7 +98,6 @@ export default function Home() {
           {currentWeather &&
             avaliableCities &&
             avaliableCities.map((city, i) => {
-
               if (!isMobile && city === selectedCity) {
                 return null; // Skip rendering the element
               }

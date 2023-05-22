@@ -8,14 +8,12 @@ export default function DailyCard({ data }) {
 
   const { weatherType, temp, day, fallbackImage } = data;
 
-  const img = `/weatherIcons/${weatherType}.png`;
-
   return (
     <div className={DailyCardStyles.container}>
       <p className={DailyCardStyles.dayText}>{day}</p>
       <p className={DailyCardStyles.tempText}>{temp + "°"}</p>
       <Image
-        className="pb-3 mx-auto drop-shadow-sm"
+        className={DailyCardStyles.image}
         src={fallbackImage}
         width={80}
         height={80}

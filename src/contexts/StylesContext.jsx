@@ -61,21 +61,21 @@ const StylesProvider = ({ children }) => {
 
   const HomeStyles = {
     homeWrapper: `${isMobile ? "" : "flex max-w-6xl mx-auto pt-10"}`,
-    firstZone: `ml-10 basis-2/3`,
+    firstZone: `ml-10 mr-5 basis-2/3`,
     topLeft: "h-[22rem] mb-4 drop-shadow-xl",
-    widgetWrapper: "flex mt-8",
+    widgetWrapper: "flex justify-between mt-8",
     widget1: "basis-1/3",
-    widget2: "basis-2/3",
+    widget2: "ml-10 basis-2/3",
     widgetNav:
-      "bg-white w-fit rounded-t-[1.3rem] ml-10 flex items-center font-semibold text-2xl",
+      "bg-white flex w-fit rounded-t-[1.3rem] flex items-center font-semibold text-2xl",
     hourlyLineDesktop:
       "rounded-[1.3rem] text-white py-5 h-[19rem] overflow-auto hideScrollbar text-center",
     widgetZoneRight: "mt-8 basis-1/3",
     labelLeft: "ml-4 mb-5 text-[#01175f] font-semibold text-2xl",
     labelRight: "ml-16 text-[#01175f] font-semibold text-2xl",
     labelButtons: (i) =>
-      `py-4 px-5 rounded-t-[1.3rem] cursor-pointer ${
-        selectedPeriod[i] ? accentColor + " text-white" : "text-[#01175f]"
+      `py-4 px-5 rounded-t-[1.3rem] cursor-pointer drop-shadow-xl ${
+        selectedPeriod[i] ? "text-white" : "bg-white text-[#01175f]"
       }`,
     nowLabel: "font-bold",
     secondZone: `ml-auto basis-1/3`,
@@ -121,10 +121,14 @@ const StylesProvider = ({ children }) => {
   };
 
   const DailyCardStyles = {
-    container:
-      "glassCard p-2 drop-shadow-xl mx-1.5 text-center font-bold maw-w-fit px-2 mb-24",
-    dayText: "text-xl pt-3",
-    tempText: "text-3xl px-8 py-2",
+    container:`glassCard text-center font-bold maw-w-fit ${isMobile ? "p-2 drop-shadow-xl mx-1.5 px-2 mb-24" : "drop-shadow-lg min-w-[7rem] mx-2.5 mb-10"}`,
+    dayText: `pt-3 mx-auto ${isMobile ? "text-xl" : "text-lg"}`,
+    tempText: `text-3xl ${isMobile ? "py-2" : "py-5"}`,
+    image: `mx-auto drop-shadow-sm ${isMobile ? "pb-3" : "pb-8"}`
+  };
+
+  const DesktopWeeklyCardStyles = {
+    container: "w-[28.2rem] px-3 overflow-x-scroll flex text-white pt-5 rounded-b-[1.3rem] rounded-r-[1.3rem]"
   };
 
   const HourlyLineStyles = {
@@ -152,7 +156,7 @@ const StylesProvider = ({ children }) => {
   const GiantCardStyles = {
     container: "rounded-[1.3rem] overflow-hidden h-[100%] text-white",
     miniCard:
-      "z-10 drop-shadow-2xl -left-10 rounded-r-3xl absolute px-6 my-16 inset-y-0 flex flex-col items-center justify-center",
+      "z-10 drop-shadow-xl -left-10 rounded-r-3xl absolute px-6 my-16 inset-y-0 flex flex-col items-center justify-center",
     temp: "font-bold text-[2.5rem] mb-8",
     cityInfo: "z-10 relative text-white",
     innerDiv: "absolute left-28 top-16 text-xl text-shadow",
@@ -181,6 +185,7 @@ const StylesProvider = ({ children }) => {
         accentColor,
         SetAccentColor,
         SetSelectedPeriod,
+        DesktopWeeklyCardStyles,
         thisMonth,
         SetThisMonth,
         updateSelectedIcon,

@@ -125,7 +125,7 @@ const StylesProvider = ({ children }) => {
   const NavCardStyles = {
     container: `cursor-pointer bg-gray-400 rounded-3xl text-center drop-shadow-xl mx-auto ml-auto w-[19rem] py-[1.5rem] my-[1.5rem]`,
     innerDiv: "text-white text-2xl overflow-hidden",
-    searchIcon: "absolute right-0 inset-y-0 flex items-center rounded-3xl",
+    searchIcon: "absolute right-0 inset-y-0 flex items-center rounded-3xl px-0.5",
     searchInput: "py-3.5 mx-5 rounded-md focus:outline-none text-black font-bold",
   };
 

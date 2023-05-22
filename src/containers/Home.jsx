@@ -14,7 +14,7 @@ export default function Home() {
   // Import Home styles from context
   const { HomeStyles, isMobile } = useContext(StylesContext);
 
-  const { SetSelectedCity, currentWeather, avaliableCities } =
+  const { SetSelectedCity, selectedCity, currentWeather, avaliableCities } =
     useContext(WeatherDataContext);
 
   return (
@@ -43,6 +43,11 @@ export default function Home() {
           {currentWeather &&
             avaliableCities &&
             avaliableCities.map((city, i) => {
+
+              if (!isMobile && city === selectedCity) {
+                return null; // Skip rendering the element
+              }
+
               return (
                 <div key={i} onClick={() => SetSelectedCity(city)}>
                   <WeatherCard

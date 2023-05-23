@@ -121,10 +121,10 @@ const StylesProvider = ({ children }) => {
   };
 
   const DailyCardStyles = {
-    container: `glassCard text-center font-bold maw-w-fit ${
+    container: `glassCard text-center font-bold ${
       isMobile
-        ? "p-2 drop-shadow-xl mx-1.5 px-2 mb-24"
-        : "drop-shadow-lg min-w-[7.5rem] mx-[0.8rem] pb-5 flex flex-col items-center justify-around"
+        ? "w-[8.5rem] p-2 drop-shadow-xl mx-1.5 px-2 mb-24"
+        : "drop-shadow-lg min-w-[7.5rem] mx-[0.8rem] pb-5 flex flex-col items-center justify-around maw-w-fit"
     }`,
     dayText: `pt-3 mx-auto ${isMobile ? "text-xl" : "text-lg"}`,
     tempText: `text-3xl ${isMobile ? "py-2" : "py-5"}`,
@@ -144,10 +144,10 @@ const StylesProvider = ({ children }) => {
   const HourlyLineStyles = {
     wrapper: `hideScrollbar ${
       isMobile
-        ? "pl-8 flex items-center overflow-x-auto"
+        ? "pl-5 flex items-center overflow-x-auto"
         : "overflow-auto flex flex-col items-center"
     }`,
-    container: `${isMobile ? "mr-2" : "mb-7"}`,
+    container: `${isMobile ? "-mr-1" : "mb-7"}`,
     dot: (i) => `mx-5 ${i === 0 ? "text-2xl" : ""}`,
     innerBox: (i) =>
       `${

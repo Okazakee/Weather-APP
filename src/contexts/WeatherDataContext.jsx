@@ -9,14 +9,17 @@ const WeatherDataProvider = ({ children }) => {
   const [currentWeather, SetCurrentWeather] = useState(null);
   const [weeklyForecast, SetWeeklyForecast] = useState(null);
   const [hourlyForecast, SetHourlyForecast] = useState(null);
+  const [windForecast, SetWindForecast] = useState(null);
   const [detailsPageData, SetDetailsPageData] = useState(null);
   const [dailyCardData, SetDailyCardData] = useState(null);
   const [hourlyLineData, SetHourlyLineData] = useState(null);
+  const [windCardData, SetWindCardData] = useState(null);
 
   // pages and component data handler
   useEffect(() => {
     if (selectedCity !== null) {
       const dailyCardData = weeklyForecast[selectedCity].slice(1);
+      const windCardData = selectedCity ? windForecast[selectedCity] : [];
 
       const currentHourIndex = new Date().getHours();
 
@@ -38,8 +41,16 @@ const WeatherDataProvider = ({ children }) => {
       SetDetailsPageData(detailsPageData);
       SetDailyCardData(dailyCardData);
       SetHourlyLineData(hourlyLineData);
+      SetWindCardData(windCardData);
     }
-  }, [currentWeather, weeklyForecast, selectedCity, hourlyForecast]);
+  }, [
+    SetWindCardData,
+    windForecast,
+    currentWeather,
+    weeklyForecast,
+    selectedCity,
+    hourlyForecast,
+  ]);
 
   return (
     <WeatherDataContext.Provider
@@ -52,6 +63,10 @@ const WeatherDataProvider = ({ children }) => {
         SetSelectedCity,
         weeklyForecast,
         SetWeeklyForecast,
+        windForecast,
+        windCardData,
+        SetWindCardData,
+        SetWindForecast,
         hourlyForecast,
         SetHourlyForecast,
         dailyCardData,

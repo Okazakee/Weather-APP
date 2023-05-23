@@ -10,6 +10,7 @@ import {
   fetchCurrentWeatherData,
   fetchHourlyForecastData,
   fetchWeeklyForecastData,
+  fetchWindForecastData,
 } from "@/libs/WeatherApiFetch";
 
 export async function getServerSideProps() {
@@ -74,12 +75,24 @@ export async function getServerSideProps() {
       {}
     );
 
+    // Fetch weekly forecast data for each city in cities array
+    const fetchWindForecast = await fetchWindForecastData(
+      cities,
+      weatherApiApiKey
+    );
+
+    const windForecastData = fetchWindForecast.reduce((acc, data, index) => {
+      const cityName = cities[index];
+      return { ...acc, [cityName]: data };
+    }, {});
+
     return {
       props: {
         cities,
         currentWeatherData,
         weeklyForecastData,
         hourlyForecastData,
+        windForecastData,
       },
     };
   } catch (error) {
@@ -92,12 +105,14 @@ export default function Index({
   currentWeatherData,
   weeklyForecastData,
   hourlyForecastData,
+  windForecastData,
 }) {
   // Import weather data from context
   const {
     SetCurrentWeather,
     SetWeeklyForecast,
     SetHourlyForecast,
+    SetWindForecast,
     SetAvaliableCities,
     SetSelectedCity,
     selectedCity,
@@ -107,11 +122,17 @@ export default function Index({
 
   // Weatherdata and viewport handler
   useEffect(() => {
-    if (currentWeatherData && weeklyForecastData && hourlyForecastData) {
+    if (
+      currentWeatherData &&
+      weeklyForecastData &&
+      hourlyForecastData &&
+      windForecastData
+    ) {
       SetAvaliableCities(cities);
       SetCurrentWeather(currentWeatherData);
       SetWeeklyForecast(weeklyForecastData);
       SetHourlyForecast(hourlyForecastData);
+      SetWindForecast(windForecastData);
     }
 
     const mobileBreakpoint = 640;
@@ -124,9 +145,11 @@ export default function Index({
     currentWeatherData,
     weeklyForecastData,
     hourlyForecastData,
+    windForecastData,
     cities,
     SetCurrentWeather,
     SetWeeklyForecast,
+    SetWindForecast,
     SetAvaliableCities,
     selectedCity,
     isMobile,

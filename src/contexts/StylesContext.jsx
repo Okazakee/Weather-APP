@@ -69,12 +69,12 @@ const StylesProvider = ({ children }) => {
     widgetNav:
       "bg-white flex w-fit rounded-t-[1.3rem] flex items-center font-semibold text-2xl",
     hourlyLineDesktop:
-      "rounded-[1.3rem] text-white py-5 h-[19rem] overflow-auto hideScrollbar text-center",
+      "rounded-[1.3rem] text-white py-5 h-[18rem] overflow-auto hideScrollbar text-center",
     widgetZoneRight: "mt-8 basis-1/3",
-    labelLeft: "ml-4 mb-5 text-[#01175f] font-semibold text-2xl",
+    labelLeft: "ml-4 my-4 text-[#01175f] font-semibold text-2xl",
     labelRight: "ml-16 text-[#01175f] font-semibold text-2xl",
     labelButtons: (i) =>
-      `py-4 px-5 rounded-t-[1.3rem] cursor-pointer drop-shadow-xl ${
+      `py-4 px-5 rounded-t-[1.3rem] cursor-pointer ${
         selectedPeriod[i] ? "text-white" : "bg-white text-[#01175f]"
       }`,
     nowLabel: "font-bold",
@@ -124,16 +124,21 @@ const StylesProvider = ({ children }) => {
     container: `glassCard text-center font-bold maw-w-fit ${
       isMobile
         ? "p-2 drop-shadow-xl mx-1.5 px-2 mb-24"
-        : "drop-shadow-lg min-w-[7rem] mx-2.5 mb-10"
+        : "drop-shadow-lg min-w-[7.5rem] mx-[0.8rem] pb-5 flex flex-col items-center justify-around"
     }`,
     dayText: `pt-3 mx-auto ${isMobile ? "text-xl" : "text-lg"}`,
     tempText: `text-3xl ${isMobile ? "py-2" : "py-5"}`,
-    image: `mx-auto drop-shadow-sm ${isMobile ? "pb-3" : "pb-8"}`,
+    image: `mx-auto drop-shadow-sm ${isMobile ? "pb-3" : ""}`,
   };
 
   const DesktopWeeklyCardStyles = {
     container:
-      "w-[28.2rem] px-3 overflow-x-scroll flex text-white pt-5 rounded-b-[1.3rem] rounded-r-[1.3rem]",
+      "h-[18rem] w-[28.6rem] px-3 overflow-x-scroll flex text-white py-5 rounded-b-[1.3rem] rounded-r-[1.3rem]",
+  };
+
+  const DesktopMonthlyCardStyles = {
+    container:
+      "snap-x snap-mandatory h-[18rem] w-[28.6rem] px-2 overflow-x-scroll flex text-white py-5 rounded-[1.3rem]",
   };
 
   const HourlyLineStyles = {
@@ -179,9 +184,20 @@ const StylesProvider = ({ children }) => {
       "py-3.5 mx-5 rounded-md focus:outline-none text-black font-bold",
   };
 
+  const WindCardStyles = {
+    wrapper: "bg-white rounded-b-[1.3rem] rounded-r-[1.3rem]",
+    cardContainer: "snap-center glassCard flex p-5 min-w-[26.2rem] mx-2.5",
+    leftChunk: "w-2/5 h-full flex flex-col justify-start",
+    rightChunk: "w-3/5 h-full flex flex-col justify-around",
+    date: "mb-auto font-bold",
+    windIcon: "mb-auto ml-2",
+    temp: "font-bold text-3xl",
+  };
+
   return (
     <StylesContext.Provider
       value={{
+        WindCardStyles,
         selectedIcons,
         SetSelectedIcons,
         isMobile,
@@ -191,6 +207,7 @@ const StylesProvider = ({ children }) => {
         SetAccentColor,
         SetSelectedPeriod,
         DesktopWeeklyCardStyles,
+        DesktopMonthlyCardStyles,
         thisMonth,
         SetThisMonth,
         updateSelectedIcon,

@@ -15,6 +15,12 @@ export default function HourlyTempLine({ currentTemp }) {
     <div className={HourlyLineStyles.wrapper}>
       {hourlyLineData &&
         hourlyLineData.map((hourInfo, i) => {
+          let temp = Math.floor(hourInfo.temp).toString();
+
+          if (temp.length === 1) {
+            temp = "0" + temp;
+          }
+
           return (
             <div key={i} className={HourlyLineStyles.container}>
               <div className={HourlyLineStyles.innerBox(i)}>
@@ -24,27 +30,21 @@ export default function HourlyTempLine({ currentTemp }) {
                       <p className={HourlyLineStyles.p}>Now</p>
                     ) : (
                       <p className={HourlyLineStyles.p}>
-                        {moment(hourInfo.time).format("hh A")}
+                        {moment(hourInfo.time).format("h A")}
                       </p>
                     )}
                     <FontAwesomeIcon
                       className={HourlyLineStyles.dot(i)}
                       icon={faCircle}
                     />
-                    {i === 0 ? (
-                      <p>{`${currentTemp}°`}</p>
-                    ) : (
-                      <p>{`${Math.floor(hourInfo.temp)}°`}</p>
-                    )}
+                    {i === 0 ? <p>{`${currentTemp}°`}</p> : <p>{`${temp}°`}</p>}
                   </>
                 ) : (
                   <>
                     {i === 0 ? (
                       <p>{`${currentTemp}°`}</p>
                     ) : (
-                      <p className={HourlyLineStyles.tempText}>{`${Math.floor(
-                        hourInfo.temp
-                      )}°`}</p>
+                      <p className={HourlyLineStyles.tempText}>{`${temp}°`}</p>
                     )}
                     <FontAwesomeIcon
                       className={HourlyLineStyles.dot(i)}

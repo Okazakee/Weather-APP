@@ -1,4 +1,5 @@
 import { useContext, useEffect } from "react";
+import Head from "next/head";
 
 import Home from "@/containers/Home";
 import Details from "@/containers/Details";
@@ -159,6 +160,23 @@ export default function Index({
   ]);
 
   return (
-    <div>{isMobile ? selectedCity ? <Details /> : <Home /> : <Home />}</div>
+    <div>
+      <Head>
+        <link rel="icon" href="/favicon.svg" />
+        <title>
+          {(selectedCity && selectedCity + " | WeatherAPP") ||
+            "Welcome to WeatherAPP!"}
+        </title>
+        <meta
+          name="description"
+          content="Weather-APP is a dynamic web application displaying real-time weather data for multiple cities. Built with Next.js, Tailwind CSS, and APIs like Open Weather Map, WeatherApi, and Open-Meteo. Responsive design and captivating city images from Pexels API enhance the user experience."
+        />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0"
+        ></meta>
+      </Head>
+      {isMobile ? selectedCity ? <Details /> : <Home /> : <Home />}
+    </div>
   );
 }

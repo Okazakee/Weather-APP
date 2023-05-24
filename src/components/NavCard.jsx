@@ -32,7 +32,7 @@ export default function NavCard({ isSearch }) {
               }`}
             >
               <FontAwesomeIcon
-                className={"text-2xl px-2"}
+                className={"w-10 px-2"}
                 icon={faMagnifyingGlass}
               />
             </div>
@@ -46,7 +46,10 @@ export default function NavCard({ isSearch }) {
           }`}
         >
           <div className={NavCardStyles.innerDiv}>
-            <FontAwesomeIcon className={"text-3xl"} icon={faLocationDot} />
+            <FontAwesomeIcon
+              className={"h-[2.05rem] mx-auto"}
+              icon={faLocationDot}
+            />
             <p>Add Localization</p>
           </div>
         </div>

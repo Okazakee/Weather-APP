@@ -26,13 +26,8 @@ export default function Home() {
     accentColor,
   } = useContext(StylesContext);
 
-  const {
-    SetSelectedCity,
-    selectedCity,
-    currentWeather,
-    avaliableCities,
-    windCardData,
-  } = useContext(WeatherDataContext);
+  const { SetSelectedCity, selectedCity, currentWeather, avaliableCities } =
+    useContext(WeatherDataContext);
 
   const widgetButtons = ["This Week", "This Month"];
 

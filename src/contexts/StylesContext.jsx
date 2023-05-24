@@ -31,7 +31,7 @@ const StylesProvider = ({ children }) => {
   // TAILWIND STYLES
   const layout = {
     root: `bg-[#f1f1f1] min-h-screen mx-auto font-sans hideTouchInputChrome ${
-      isMobile ? "" : "pb-10 px-5"
+      isMobile ? "" : "pb-10 px-10"
     }`,
     navbar: "sm:hidden",
   };
@@ -60,7 +60,9 @@ const StylesProvider = ({ children }) => {
   };
 
   const HomeStyles = {
-    homeWrapper: `${isMobile ? "" : "flex max-w-6xl mx-auto pt-20 scale-110 transform-gpu"}`,
+    homeWrapper: `${
+      isMobile ? "" : "flex max-w-6xl mx-auto pt-20 scale-110 transform-gpu"
+    }`,
     firstZone: `ml-10 mr-5 basis-2/3`,
     topLeft: "h-[22rem] mb-4 drop-shadow-xl",
     widgetWrapper: "flex justify-between mt-8",
@@ -69,8 +71,9 @@ const StylesProvider = ({ children }) => {
     navContainer: "mt-12",
     widgetNav:
       "bg-white flex w-fit rounded-t-[1.3rem] flex items-center font-semibold text-2xl",
-    hourlyLineDesktop:
-      "rounded-[1.3rem] text-white py-5 h-[18rem] overflow-auto hideScrollbar text-center",
+    hourlyLineDesktop: `rounded-[1.3rem] text-white py-5 h-[18rem] overflow-auto hideScrollbar text-center ${
+      isMobile ? "" : ""
+    }`,
     widgetZoneRight: "basis-1/3",
     labelLeft: "ml-4 my-4 text-[#01175f] font-semibold text-2xl",
     labelRight: "ml-12 my-4 text-[#01175f] font-semibold text-2xl",
@@ -117,7 +120,7 @@ const StylesProvider = ({ children }) => {
     weatherText: "mx-auto font-light",
     climateInfo: "flex items-center justify-center mt-4 ",
     tempText: "ml-5 font-bold text-[5.8rem]",
-    tempLine: "my-[3rem]",
+    tempLine: "my-[2rem]",
     dailyCardsWrapper: "pl-2 grid grid-flow-col overflow-x-auto hideScrollbar",
   };
 
@@ -149,7 +152,16 @@ const StylesProvider = ({ children }) => {
         : "overflow-auto flex flex-col items-center"
     }`,
     container: `${isMobile ? "-mr-1" : "mb-7"}`,
-    dot: (i) => `mx-5 ${i === 0 ? "text-2xl" : ""}`,
+    dot: (i) =>
+      `${
+        isMobile
+          ? i === 0
+            ? "w-6 mx-auto my-2"
+            : "w-4 mx-8 my-4"
+          : i === 0
+          ? "w-6 mx-5"
+          : "w-5 mx-7"
+      }`,
     innerBox: (i) =>
       `${
         isMobile
@@ -160,7 +172,7 @@ const StylesProvider = ({ children }) => {
           ? "flex items-center font-bold text-3xl"
           : "flex items-center"
       }`,
-    p: `${isMobile ? "w-16 text-[0.8rem]" : ""}`,
+    p: `${isMobile ? "w-16 text-[0.8rem] mx-auto" : ""}`,
     tempText: "text-2xl",
   };
 

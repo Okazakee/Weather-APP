@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import Head from "next/head";
 
 import { MobileNav } from "./MobileNav";
 
@@ -10,14 +9,11 @@ export default function Layout({ children }) {
   const { layout } = useContext(StylesContext);
 
   return (
-    <div>
-      <Head>{/* <link rel="icon" href="/favicon.svg" /> */}</Head>
-      <main className={layout.root}>
-        {children}
-        <div className={layout.navbar}>
-          <MobileNav />
-        </div>
-      </main>
-    </div>
+    <main className={layout.root}>
+      {children}
+      <div className={layout.navbar}>
+        <MobileNav />
+      </div>
+    </main>
   );
 }

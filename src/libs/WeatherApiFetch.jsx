@@ -19,7 +19,7 @@ export const fetchCurrentWeatherData = async (
 
       try {
         const pexelsResponse = await pexelsClient.photos.search({
-          query: cityName,
+          query: cityName + " city",
           per_page: 1,
           orientation: "landscape",
           size: "small",

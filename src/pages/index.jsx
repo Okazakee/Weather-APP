@@ -16,7 +16,7 @@ import {
 
 export async function getServerSideProps() {
   // Hardcoded 3 main cities to check
-  const cities = ["London", "Dubai", "Rome"];
+  const cities = ["London", "Turin", "Rome"];
 
   const openWeatherApiKey = process.env.OPENWEATHER_API_KEY;
   const weatherApiApiKey = process.env.WEATHERAPI_API_KEY;

@@ -60,19 +60,20 @@ const StylesProvider = ({ children }) => {
   };
 
   const HomeStyles = {
-    homeWrapper: `${isMobile ? "" : "flex max-w-6xl mx-auto pt-10"}`,
+    homeWrapper: `${isMobile ? "" : "flex max-w-6xl mx-auto pt-20 scale-110 transform-gpu"}`,
     firstZone: `ml-10 mr-5 basis-2/3`,
     topLeft: "h-[22rem] mb-4 drop-shadow-xl",
     widgetWrapper: "flex justify-between mt-8",
     widget1: "basis-1/3",
     widget2: "ml-10 basis-2/3",
+    navContainer: "mt-12",
     widgetNav:
       "bg-white flex w-fit rounded-t-[1.3rem] flex items-center font-semibold text-2xl",
     hourlyLineDesktop:
       "rounded-[1.3rem] text-white py-5 h-[18rem] overflow-auto hideScrollbar text-center",
-    widgetZoneRight: "mt-8 basis-1/3",
+    widgetZoneRight: "basis-1/3",
     labelLeft: "ml-4 my-4 text-[#01175f] font-semibold text-2xl",
-    labelRight: "ml-16 text-[#01175f] font-semibold text-2xl",
+    labelRight: "ml-12 my-4 text-[#01175f] font-semibold text-2xl",
     labelButtons: (i) =>
       `py-4 px-5 rounded-t-[1.3rem] cursor-pointer ${
         selectedPeriod[i] ? "text-white" : "bg-white text-[#01175f]"
@@ -80,7 +81,7 @@ const StylesProvider = ({ children }) => {
     nowLabel: "font-bold",
     secondZone: `ml-auto basis-1/3`,
     div1: `${isMobile ? "text-center pt-10 text-[#01175f]" : "hidden"}`,
-    cardWrapper: ` ${isMobile ? "pb-28" : "mx-5"}`,
+    cardWrapper: ` ${isMobile ? "pb-28" : "mx-5 my-6"}`,
     addCityButtonDiv: `cursor-pointer flex items-center w-fit mx-auto text-[#01175f] ${
       isMobile ? "pt-10 pb-7" : "my-10"
     }`,
@@ -176,7 +177,7 @@ const StylesProvider = ({ children }) => {
   };
 
   const NavCardStyles = {
-    container: `cursor-pointer bg-gray-400 rounded-[1.3rem] text-center drop-shadow-xl mx-auto ml-auto w-[19rem] py-[1.5rem] my-[1.5rem]`,
+    container: `cursor-pointer bg-gray-400 rounded-[1.3rem] text-center drop-shadow-xl mx-auto ml-auto w-[19rem] py-[1.5rem]`,
     innerDiv: "text-white text-2xl overflow-hidden",
     searchIcon:
       "absolute right-0 inset-y-0 flex items-center rounded-[1.3rem] px-0.5",

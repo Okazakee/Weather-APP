@@ -126,7 +126,7 @@ export default function Home() {
             })}
         </div>
         {!isMobile && (
-          <div className={""}>
+          <div className={HomeStyles.navContainer}>
             <div className={HomeStyles.widgetZoneRight}>
               <p className={HomeStyles.labelRight}>Search</p>
               <NavCard isSearch={true} />

@@ -16,7 +16,7 @@ import {
 
 export async function getServerSideProps() {
   // Hardcoded 3 main cities to check
-  const cities = ["London", "Turin", "Rome"];
+  const cities = ["London", "Dubai", "Rome"];
 
   const openWeatherApiKey = process.env.OPENWEATHER_API_KEY;
   const weatherApiApiKey = process.env.WEATHERAPI_API_KEY;
@@ -168,10 +168,19 @@ export default function Index({
             "Welcome to WeatherAPP!"}
         </title>
         <meta property="og:title" content="WeatherAPP by Okazakee" />
-        <meta property="og:description" content="WeatherAPP is a dynamic web application displaying real-time weather data for multiple cities. Built with Next.js, Tailwind CSS, and APIs like Open Weather Map, WeatherApi, and Open-Meteo. Responsive design and captivating city images from Pexels API enhance the user experience." />
-        <meta property="og:image" content="https://weather-app-okazakee.vercel.app/favicon.svg" />
-        <meta property="og:url" content="https://weather-app-okazakee.vercel.app/" />
-        <meta property="og:type" content="WeatherAPP"></meta>
+        <meta
+          property="og:description"
+          content="WeatherAPP is a dynamic web application displaying real-time weather data for multiple cities. Built with Next.js, Tailwind CSS, and APIs like Open Weather Map, WeatherApi, and Open-Meteo. Responsive design and captivating city images from Pexels API enhance the user experience."
+        />
+        <meta
+          property="og:image"
+          content="https://okazakee-dev-storage.s3.eu-west-3.amazonaws.com/Projs+random+imgs/weatherAPP-meta.png"
+        />
+        <meta
+          property="og:url"
+          content="https://weather-app-okazakee.vercel.app/"
+        />
+        <meta property="og:type" content="website"></meta>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0"

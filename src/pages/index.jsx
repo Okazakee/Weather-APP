@@ -167,10 +167,11 @@ export default function Index({
           {(selectedCity && selectedCity + " | WeatherAPP") ||
             "Welcome to WeatherAPP!"}
         </title>
-        <meta
-          name="description"
-          content="Weather-APP is a dynamic web application displaying real-time weather data for multiple cities. Built with Next.js, Tailwind CSS, and APIs like Open Weather Map, WeatherApi, and Open-Meteo. Responsive design and captivating city images from Pexels API enhance the user experience."
-        />
+        <meta property="og:title" content="WeatherAPP by Okazakee" />
+        <meta property="og:description" content="WeatherAPP is a dynamic web application displaying real-time weather data for multiple cities. Built with Next.js, Tailwind CSS, and APIs like Open Weather Map, WeatherApi, and Open-Meteo. Responsive design and captivating city images from Pexels API enhance the user experience." />
+        <meta property="og:image" content="https://weather-app-okazakee.vercel.app/favicon.svg" />
+        <meta property="og:url" content="https://weather-app-okazakee.vercel.app/" />
+        <meta property="og:type" content="WeatherAPP"></meta>
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0"

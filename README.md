@@ -1,6 +1,6 @@
-# Weather-APP Project - Front-end Developer Web
+# Weather-APP Project
 
-<img alt="preview" width='50%' align="center" src="https://okazakee-dev-storage.s3.eu-west-3.amazonaws.com/Projs+random+imgs/weather-app.png" />
+<img alt="preview" width='50%' align="center" src="https://okazakee-dev-storage.s3.eu-west-3.amazonaws.com/Projs+random+imgs/weatherApp.png" />
 
 Welcome to the repository of the Weather-APP project, a web application that displays weather data for three different cities (dynamic features in the future). This project was developed as part of a front-end development test and utilizes various API service to retrieve real-time weather data.
 
